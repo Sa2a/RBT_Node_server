@@ -1,16 +1,11 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
-export class Bus {
+export class RouteBus {
 
-    @PrimaryGeneratedColumn()
+     @PrimaryGeneratedColumn()
 
     id:number;
 
-    @Column()
 
-    bus_numbers:String
-
-
-
-}
+ }
