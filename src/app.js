@@ -3,9 +3,11 @@ const session = require('express-session');
 const express = require("express");
 const bodyParser = require('body-parser');
 let createConnection = require("typeorm").createConnection();
+const path = require("path");
 
 createConnection.then(()=> {
-
+    let location = path.join(__dirname,"../public");
+    console.log(location);
     let app = express();
     app.use(express.static(location));
     app.use(bodyParser.json());
