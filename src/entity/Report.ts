@@ -1,0 +1,20 @@
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+
+@Entity()
+export class Report {
+
+    @PrimaryGeneratedColumn()
+
+    id:number;
+
+    @Column()
+
+    content:String;
+
+    @Column()
+
+    type:String;
+
+
+
+}
