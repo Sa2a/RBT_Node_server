@@ -1,18 +1,18 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {RoutePath} from "./RoutePath";
 
 @Entity()
 export class Coordinates {
 
     @PrimaryGeneratedColumn()
-
     id:number;
 
-    @Column()
+    @Column('double')
+    latitude:number;
 
-    letittude:number;
-
-    @Column()
-
+    @Column('double')
     longitude:number;
 
+    @ManyToOne(type => RoutePath, routePath =>routePath.coordinates)
+    routePath: RoutePath;
 }

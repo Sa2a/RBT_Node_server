@@ -1,14 +1,7 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {User} from "./User";
 
 @Entity()
-export class Admin {
+export class Admin extends User{
 
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    name: String;
-
-    @Column()
-    password: String;
 }
