@@ -10,6 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
+var Parent_1 = require("./Parent");
+var Supervisor_1 = require("./Supervisor");
+var Attendance_1 = require("./Attendance");
+var Bus_1 = require("./Bus");
+var Coordinates_1 = require("./Coordinates");
 var Student = /** @class */ (function () {
     function Student() {
     }
@@ -37,6 +42,27 @@ var Student = /** @class */ (function () {
         typeorm_1.Column(),
         __metadata("design:type", Number)
     ], Student.prototype, "level", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function (type) { return Parent_1.Parent; }, function (parent) { return parent.students; }),
+        __metadata("design:type", Parent_1.Parent)
+    ], Student.prototype, "parent", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function (type) { return Supervisor_1.Supervisor; }, function (supervisor) { return supervisor.students; }),
+        __metadata("design:type", Supervisor_1.Supervisor)
+    ], Student.prototype, "supervisor", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function (type) { return Attendance_1.Attendance; }, function (attendance) { return attendance.student; }),
+        __metadata("design:type", Array)
+    ], Student.prototype, "attendances", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function (type) { return Bus_1.Bus; }, function (bus) { return bus.students; }),
+        __metadata("design:type", Bus_1.Bus)
+    ], Student.prototype, "bus", void 0);
+    __decorate([
+        typeorm_1.OneToOne(function (type) { return Coordinates_1.Coordinates; }),
+        typeorm_1.JoinColumn(),
+        __metadata("design:type", Coordinates_1.Coordinates)
+    ], Student.prototype, "pickupCoordinate", void 0);
     Student = __decorate([
         typeorm_1.Entity()
     ], Student);
