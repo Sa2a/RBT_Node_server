@@ -6,8 +6,11 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({length: 50, unique: true})
-    userName: string;
+    @Column({length: 32})
+    firstName: string;
+
+    @Column({length: 32})
+    lastName: string;
 
     @Column({length: 32})
     password: string;
@@ -18,7 +21,7 @@ export class User {
     @Column({length:32})
     contactNumber: string;
 
-    @Column()
+    @Column('date')
     dateOfBirth: Date;
 
     @Column({unique:true})

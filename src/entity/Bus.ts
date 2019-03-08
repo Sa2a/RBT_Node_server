@@ -20,7 +20,7 @@ export class Bus {
     supervisors: Supervisor[];
 
     @OneToMany(type => Driver, driver=> driver.bus)
-    driver: Supervisor[];
+    drivers: Driver[];
 
     @OneToOne(type => RoutePath)
     @JoinColumn()
