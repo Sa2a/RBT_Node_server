@@ -27,7 +27,7 @@ var Student = /** @class */ (function () {
         __metadata("design:type", String)
     ], Student.prototype, "name", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column('date'),
         __metadata("design:type", Date)
     ], Student.prototype, "dateOfBirth", void 0);
     __decorate([

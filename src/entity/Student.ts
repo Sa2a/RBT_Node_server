@@ -11,7 +11,7 @@ export class Student {
     id: number;
     @Column({length: 50})
     name: string;
-    @Column()
+    @Column('date')
     dateOfBirth: Date;
     @Column()
     age: number;
