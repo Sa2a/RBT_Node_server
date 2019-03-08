@@ -24,3 +24,23 @@ app.get('/reactTestGet', async (req, res) => {
 
 });
 
+
+
+app.post('/users/addUser',(req,res)=>{
+    console.log(req.body);
+    /*
+    { user:{
+    firstName: 'khaled',
+     lastName: 'elsaka',
+     email: 'khaled.elsaka25@gmail.com',
+     password: 'sadf',
+     contactNumber: '213',
+     nationalNumber: '132',
+     address: 'adg',
+     DayOfBirth: '32',
+     MothOfBirth: '2',
+     yearOfBirth: '3133',
+     userType: 'parent' } }
+
+     */
+});
