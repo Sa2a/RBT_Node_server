@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@types/node": "^11.10.4",
+    "array": "^0.4.3",
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -20,6 +21,8 @@
     "path": "^0.12.7",
     "pug": "2.0.0-beta11",
     "reflect-metadata": "^0.1.13",
+    "shuffle": "^0.2.2",
+    "shuffle-array": "^1.0.1",
     "typeorm": "^0.2.14"
   }
 }

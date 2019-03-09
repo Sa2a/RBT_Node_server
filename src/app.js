@@ -26,7 +26,7 @@ createConnection.then(()=> {
         app,path
     };
 
-    const test = require("./clientrequests/TestReact");
+    const test = require("./clientrequests/Admin_request");
 
 }).catch(error => {
     console.log(error);

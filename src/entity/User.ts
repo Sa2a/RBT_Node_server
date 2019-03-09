@@ -13,6 +13,9 @@ export class User {
     lastName: string;
 
     @Column({length: 32})
+    username: string;
+
+    @Column({length: 32})
     password: string;
 
     @Column({unique: true})
