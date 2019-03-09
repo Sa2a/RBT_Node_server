@@ -1,7 +1,9 @@
 const md= require('reflect-metadata');
+
 const session = require('express-session');
 const express = require("express");
 const bodyParser = require('body-parser');
+const path = require("path");
 let createConnection = require("typeorm").createConnection();
 const path = require("path");
 
@@ -14,6 +16,11 @@ createConnection.then(()=> {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(session({secret: "secret", saveUninitialized: true, resave: false}));
 
+    app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
    /* app.set('views',location);
     app.engine('html', require('ejs').renderFile);
     app.set('view engine', 'ejs');
