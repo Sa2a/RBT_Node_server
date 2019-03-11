@@ -5,7 +5,6 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const path = require("path");
 let createConnection = require("typeorm").createConnection();
-const path = require("path");
 
 createConnection.then(()=> {
     let location = path.join(__dirname,"../public");
