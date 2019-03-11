@@ -5,7 +5,6 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const path = require("path");
 let createConnection = require("typeorm").createConnection();
-const path = require("path");
 
 createConnection.then(()=> {
     let location = path.join(__dirname,"../public");
@@ -33,7 +32,11 @@ createConnection.then(()=> {
         app,path
     };
 
-    const test = require("./clientrequests/Admin_request");
+    const admin = require("./clientrequests/Admin_request");
+    const parent = require("./clientrequests/Parent_request");
+    const supervisor = require("./clientrequests/Supervisor_requests");
+    const driver = require("./clientrequests/Driver_requests");
+
 
 }).catch(error => {
     console.log(error);

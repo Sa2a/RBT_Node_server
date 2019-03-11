@@ -34,7 +34,7 @@ let add_student=async function(stud)
 let add_parent=async function(par)
 {
     let studentRep = await connection.getRepository(Parent);
-    await studentRep.save(stud);
+    await studentRep.save(par);
 }
 let add_superavisor=async function(sup)
 {
@@ -42,10 +42,10 @@ let add_superavisor=async function(sup)
     await studentRep.save(sup);
 }
 
-let add_driver=async function(driv)
+let add_driver=async function(drive)
 {
     let studentRep = await connection.getRepository(Driver);
-    await studentRep.save(driv);
+    await studentRep.save(drive);
 }
 let add_buses=async function(bus){
     let busRep=await connection.getRepository(Bus);
@@ -55,12 +55,24 @@ let add_buses=async function(bus){
 //get all admins
 let get_admins = async function ()
 {
-    let userExamRepo = await getConnection.getRepository(Admin);
-    let Exams = await userExamRepo.find(
-        //relations : ["id","username","password"]
-    );
-    return Exams;
+    let admin = await getConnection.getRepository(Admin);
+    let Ad = await admin.find();
+    return Ad;
 };
+
+let getparents=async function(){
+    let ParentRepo=await getConnection.getRepository(Parent);
+    let Parents=await ParentRepo.find();
+    return parents;}
+
+
+let review_reports=async function(){
+    let ParentRepo=await getConnection.getRepository(Report);
+    let repo=await ParentRepo.find();
+    return repo;
+}
+
+
 
 ///////
 
@@ -234,9 +246,11 @@ module.exports ={
     add_superavisor,
     add_driver,
     add_buses,
+    getparents,
     get_admins,
+    review_reports,
     findByCandidateAndExamAndPosition,
     findByCandidateAndPosition,
-    findById,
+
     getUserExam,updateSolvingUserExam, updateUserExamResults,getUserEx
 };

@@ -41,17 +41,18 @@ app.get('/get_add_student', async (req, res) => {
 
 app.get('/get_add_parent', async (req, res) => {
     let p=new parent();
-    p.id=req.id;
-    p.username=req.body.username;
-    p.password=req.body.password;
-    p.email=req.body.email;
+    p.id=/*req.id*/5454;
+    p.username=/*req.body.username*/'hhht';
+    p.password=/*req.body.password*/'hhhh';
+    /*p.email=req.body.email;
     p.contactNumber=req.body.contactNumber;
     p.nationalNumber=req.body.nationalNumber;
     p.firstName=req.body.firstName;
     p.lastName=req.body.lastName;
-    p.dateOfBirth=req.body.dateOfBirth;
+    p.dateOfBirth=req.body.dateOfBirth;*/
     let add=Admin_cont.add_parent(p);
     res.send(p);
+
 });
 
 app.get('/get_add_supervisor', async (req, res) => {
@@ -101,12 +102,26 @@ app.get('/get_add_bus', async (req, res) => {
 
 app.get('/get_find_admins', async (req, res) => {
 
-    Admin_cont.findById().then((result)=>{
+    Admin_cont.get_admins().then((result)=>{
         console.log(result);
         res.send(result);
 
-    }).catch(error);
+    });
 
-    res.send();
 });
 
+app.get('get_find_parents',async (req,res)=>
+{
+    Admin_cont.getparents().then((result) => {
+        console.log(result);
+        res.send(result);
+    })
+})
+
+app.get('/review_reports', async (req, res) => {
+
+    Admin_cont.review_reports().then((result)=>{
+        console.log(result);
+        res.send(result);
+    });
+});
