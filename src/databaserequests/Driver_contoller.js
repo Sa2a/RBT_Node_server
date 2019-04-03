@@ -6,9 +6,11 @@ const eventEmitter = require("events");
 
 
 
-
-
-
+let add_report=async function(report)
+{
+    let adminRep = await connection.getRepository(Report);
+    await adminRep.save(report);
+}
 
 
 
@@ -21,5 +23,6 @@ const eventEmitter = require("events");
 
 
 module.exports={
+add_report,
 
 }

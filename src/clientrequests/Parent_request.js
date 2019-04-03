@@ -20,6 +20,7 @@ app.get('/add_report', async (req, res) => {
     res.send(repo);
 });
 
+
 //log in
 
 app.get('/log_in_parent', async (req,res)=>{
@@ -30,7 +31,7 @@ app.get('/log_in_parent', async (req,res)=>{
     let pr=Parent_cont.check(p).then(result=>{
         if(result!=null){
        res.send(result);}
-        else{res.send(false)};
+        else{res.send(null)};
     });
 
 });

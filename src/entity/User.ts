@@ -21,9 +21,12 @@ export class User {
     @Column({unique: true})
     email: string;
 
-    @Column({length:32})
+    @Column()
     contactNumber: string;
 
+    @Column()
+
+    address: string;
     @Column('date')
     dateOfBirth: Date;
 

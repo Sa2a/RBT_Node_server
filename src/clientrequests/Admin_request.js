@@ -8,19 +8,49 @@ const bus=require("../entity/Bus").Bus;
 const app = require("../app").app;
 const getConnection = require("typeorm").getConnection();
 const connection = getConnection;
+const session = require('express-session');
 
 
 
-app.get('/get_add_admin', async (req, res) => {
+app.post('/get_add_admin', async (req, res) => {
+
     let addmin=new ad_();
     addmin.id=req.body.id;
-    addmin.username=req.body.username;
+    addmin.firstName=req.body.firstName;
+    addmin.lastName=req.body.lastName;
+    addmin.username=addmin.firstName+"_"+addmin.lastName;
     addmin.password=req.body.password;
-      let add=Admin_cont.add_admin(addmin);
-    res.send(addmin);
+    addmin.contactNumber=req.body.contactNumber;
+    addmin.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
+    addmin.email=req.body.email;
+    addmin.nationalNumber=req.body.nationalNumber;
+
+        Admin_cont.check_admins_supervisor_driver_parent_student(addmin.id).then((result)=>{
+        if(result==false){res.send(false)}
+        else {
+            if (req.body.UserType.localeCompare("Admin")) {
+
+                let add = Admin_cont.add_admin(addmin);
+                res.send(addmin);
+            }
+            else if(req.body.UserType.localeCompare("Supervisor")){
+                let add=Admin_cont.add_superavisor(addmin);
+            }
+            else if(req.body.UserType.localeCompare("Driver")){
+                let add=Admin_cont.add_driver(addmin);
+            }
+            else{
+                let add=Admin_cont.add_parent(addmin);
+            }
+
+        }
+    })
+
 });
 
-app.get('/get_add_student', async (req, res) => {
+
+//add student
+app.post('/get_add_student', async (req, res) => {
     let stud=new student();
     stud.id=req.body.id;
     stud.name=req.body.name;
@@ -33,25 +63,37 @@ app.get('/get_add_student', async (req, res) => {
     stud.dateOfBirth=req.body.dateOfBirth;
     stud.pickupCoordinate=req.body.pickupCoordinate;
     stud.supervisor=req.body.supervisor;
+    let check=Admin_cont.check_admins_supervisor_driver_parent_student(stud.id).then((result)=>{
+        if(result==false){res.send(false)}
+        else{
+            let add=Admin_cont.add_student(stud);
+            res.send(add);
+        }
+    })
 
-    let add=Admin_cont.add_student(stud);
-    res.send(add);
 });
 
 
-app.get('/get_add_parent', async (req, res) => {
+/*app.get('/get_add_parent', async (req, res) => {
     let p=new parent();
-    p.id=/*req.id*/5454;
-    p.username=/*req.body.username*/'hhht';
-    p.password=/*req.body.password*/'hhhh';
-    /*p.email=req.body.email;
+    p.id=req.id;
+    p.username=req.body.username;
+    p.password=req.body.password;
+
+    p.email=req.body.email;
     p.contactNumber=req.body.contactNumber;
     p.nationalNumber=req.body.nationalNumber;
     p.firstName=req.body.firstName;
     p.lastName=req.body.lastName;
-    p.dateOfBirth=req.body.dateOfBirth;*/
-    let add=Admin_cont.add_parent(p);
-    res.send(p);
+    p.dateOfBirth=req.body.dateOfBirth;
+    let check=Admin_cont.check_admins_supervisor_driver_parent_student(p.id).then((result)=>{
+        if(result==false){res.send(false)}
+        else{
+            let add=Admin_cont.add_parent(p);
+            res.send(true);
+        }
+    })
+
 
 });
 
@@ -62,18 +104,22 @@ app.get('/get_add_supervisor', async (req, res) => {
     sup_vis.password=req.body.password;
     sup_vis.firstName=req.body.firstName;
     sup_vis.lastName=req.body.lastName;
-    sup_vis.dateOfBirth=req.body.dateOfBirth;
     sup_vis.email=req.body.email;
-    sup_vis.contactNumber=req.body.contactNumber;
     sup_vis.nationalNumber=req.body.nationalNumber;
+    sup_vis.dateOfBirth=req.body.dateOfBirth;
+    sup_vis.contactNumber=req.body.contactNumber;
     sup_vis.bus=req.body.bus;
 
-
+    let check=Admin_cont.check_admins_supervisor_driver_parent_student(sup_vis.id).then((result)=>{
+        if(result==false){res.send(false)}
+        else{
     let add=Admin_cont.add_superavisor(sup_vis);
-    res.send(add);
+    res.send(add.then());
+        }
+    })
 });
 
-app.get('/get_add_driver', async (req, res) => {
+app.post('/get_add_driver', async (req, res) => {
     let driver=new driv();
     driver.id=req.id;
     driver.username=req.body.username;
@@ -86,11 +132,16 @@ app.get('/get_add_driver', async (req, res) => {
     driver.nationalNumber=req.body.nationalNumber;
     driver.bus=req.body.bus;
 
-    let add=Admin_cont.add_driver(driver);
-    res.send(add);
+    let check=Admin_cont.check_admins_supervisor_driver_parent_student(sup_vis.id).then((result)=>{
+        if(result==false){res.send(false)}
+        else{
+            let add=Admin_cont.add_driver(driver);
+            res.send(add);
+        }
+    })
 });
-
-app.get('/get_add_bus', async (req, res) => {
+*/
+app.post('/get_add_bus', async (req, res) => {
     let buses=new bus();
     buses.id=req.id;
     buses.routePath=req.body.routePath;
@@ -117,7 +168,20 @@ app.get('get_find_parents',async (req,res)=>
         res.send(result);
     })
 })
-
+app.get('get_find_drivers',async (req,res)=>
+{
+    Admin_cont.getdrivers().then((result) => {
+        console.log(result);
+        res.send(result);
+    })
+})
+app.get('get_find_supervisors',async (req,res)=>
+{
+    Admin_cont.getsupervisor().then((result) => {
+        console.log(result);
+        res.send(result);
+    })
+})
 app.get('/review_reports', async (req, res) => {
 
     Admin_cont.review_reports().then((result)=>{
@@ -125,3 +189,16 @@ app.get('/review_reports', async (req, res) => {
         res.send(result);
     });
 });
+
+app.get('/login',async  (req,res)=>{
+    Admin_cont.check_adimn().then (
+        (result=>{
+            if(result==true){
+              req.session.success=true;
+            }
+            else {
+                req.session.success=false;
+            }
+        })
+    )
+})
