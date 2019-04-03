@@ -32,7 +32,11 @@ createConnection.then(()=> {
         app,path
     };
 
-    const test = require("./clientrequests/TestReact");
+    const admin = require("./clientrequests/Admin_request");
+    const parent = require("./clientrequests/Parent_request");
+    const supervisor = require("./clientrequests/Supervisor_requests");
+    const driver = require("./clientrequests/Driver_requests");
+
 
 }).catch(error => {
     console.log(error);

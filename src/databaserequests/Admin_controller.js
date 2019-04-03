@@ -1,10 +1,13 @@
+//import {Bus} from "../entity/Bus";
+
 const shuffle = require('shuffle-array');
-const UserExams = require('../entity/UserExams').UserExams;
-const Candidate = require('../entity/Candidate').Candidate;
-const QuestionDetail = require('../entity/Admin').QuestionDetail;
-const Answer =require('../entity/Answer').Answer;
-const Question = require('../entity/Question').Question;
-const Exam = require('../entity/Exam').Exam;
+const Admin = require('../entity/Admin').Admin;
+const Driver = require('../entity/Driver').Driver;
+const bus = require('../entity/Bus').Bus;
+const Student = require('../entity/Student').Student;
+const Supervisor =require('../entity/Supervisor').Supervisor;
+const Report = require('../entity/Report').Report;
+const Parent = require('../entity/Parent').Parent;
 const metadata = require("reflect-metadata");
 const getConnection = require("typeorm").getConnection();
 const connection = getConnection;
@@ -12,15 +15,122 @@ const eventEmitter = require("events");
 
 let event = new eventEmitter();
 
-let findById = async function (id)
+// to add a new admin
+let add_admin=async function(admin)
 {
-    let userExamRepo = await getConnection.getRepository(UserExams);
-    let Exams = await userExamRepo.findOne(id,{
-        relations : ["exam","candidate","precedence","questions","position"]
-    });
-    return Exams;
-};
+    let adminRep = await connection.getRepository(Admin);
+    await adminRep.save(admin);
+}
 
+// add a new student
+let add_student=async function(stud)
+{
+    let studentRep = await connection.getRepository(Student);
+    await studentRep.save(stud);
+}
+
+//add a new parent
+
+let add_parent=async function(par)
+{
+    let studentRep = await connection.getRepository(Parent);
+    await studentRep.save(par);
+}
+
+//add a new supervisor
+let add_superavisor=async function(sup)
+{
+    let studentRep = await connection.getRepository(Supervisor);
+    await studentRep.save(sup);
+}
+
+//add a new driver
+let add_driver=async function(drive)
+{
+    let studentRep = await connection.getRepository(Driver);
+    await studentRep.save(drive);
+}
+//add bus
+let add_buses=async function(bus){
+    let busRep=await connection.getRepository(Bus);
+    await busRep.save(bus);
+}
+//get all admins
+let get_admins = async function ()
+{
+    let admin = await getConnection.getRepository(Admin);
+    let Ad = await admin.find();
+    return Ad;
+};
+//get all parents
+let getparents=async function(){
+    let ParentRepo=await getConnection.getRepository(Parent);
+    let Parents=await ParentRepo.find();
+    return Parents;}
+
+    ////get all drivers
+let getdrivers=async function(){
+    let DriverRepo=await getConnection.getRepository(Driver);
+    let drivers=await DriverRepo.find();
+    return drivers;}
+
+    ////get all supervisor
+let getsupervisor=async function(){
+    let supervisorRepo=await getConnection.getRepository(Supervisor);
+    let supervis=await supervisorRepo.find();
+    return supervis;}
+//review reports
+let review_reports=async function(){
+    let ParentRepo=await getConnection.getRepository(Report);
+    let repo=await ParentRepo.find();
+    return repo;
+}
+// check admin
+let check_adimn=async function (id){
+    let admin = await getConnection.getRepository(Admin);
+    let ad=await admin.findOne(id);
+    if(ad!=null){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+let check_admins_supervisor_driver_parent_student = async function (id)
+{
+    let admin = await getConnection.getRepository(Admin);
+    let supervisor = await getConnection.getRepository(Supervisor);
+    let driver = await getConnection.getRepository(Driver);
+    let parent= await getConnection.getRepository(Parent);
+    let student = await getConnection.getRepository(Student);
+    let Ad= await admin.findOne(id);
+    let sup = await supervisor.findOne(id);
+    let driv = await driver.findOne(id);
+    let par= await parent.findOne(id);
+    let stud= await student.findOne(id);
+
+
+    if(Ad==null&&sup==null&&driv==null&&par==null&&stud==null){
+        return true;
+    }
+    else{
+      return false;
+    }
+};
+let check_admin= async function(id){
+    let admin = await getConnection.getRepository(Admin);
+    let ad=await admin.find(id);
+    if(ad!=null){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+/*
+///////
 
 let findByCandidateAndPosition = async function (candidate,position)
 {
@@ -181,13 +291,29 @@ let updateUserExamResults = async (req) => {
     await connection.getRepository(UserExams).update({id:userExam.id},{passed:passed, score:score});
 
 };
-
+*/
 
 module.exports ={
     event,
-    save,
-    findByCandidateAndExamAndPosition,
+    //save,
+    add_admin,
+    add_student,
+    add_parent,
+    add_superavisor,
+    add_driver,
+    add_buses,
+    getparents,
+    get_admins,
+    review_reports,
+    check_admins_supervisor_driver_parent_student,
+    getdrivers,
+    getsupervisor,
+    check_adimn,
+
+
+  /*  findByCandidateAndExamAndPosition,
     findByCandidateAndPosition,
-    findById,
-    getUserExam,updateSolvingUserExam, updateUserExamResults,getUserEx
+
+    getUserExam,updateSolvingUserExam, updateUserExamResults,getUserEx*/
+
 };
