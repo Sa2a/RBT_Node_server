@@ -13,50 +13,49 @@ const session = require('express-session');
 
 
 app.post('/add_user', async (req, res) => {
+    console.log(req.body);
 
-
-
-        Admin_cont.check_admins_supervisor_driver_parent_student(req.body.username).then((result)=>{
+        Admin_cont.check_admins_supervisor_driver_parent_student(req.body.user.email).then((result)=>{
         if(result==false){res.send(false)}
         else {
-            if (req.body.UserType.localeCompare("Admin")) {
+            if (req.body.user.userType.localeCompare("Admin")) {
                 let addmin=new ad_();
-                addmin.id=req.body.id;
-                addmin.firstName=req.body.firstName;
-                addmin.lastName=req.body.lastName;
+                addmin.id=req.body.user.id;
+                addmin.firstName=req.body.user.firstName;
+                addmin.lastName=req.body.user.lastName;
                 addmin.username=addmin.firstName+"_"+addmin.lastName;
-                addmin.password=req.body.password;
-                addmin.contactNumber=req.body.contactNumber;
-                addmin.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
-                addmin.email=req.body.email;
-                addmin.nationalNumber=req.body.nationalNumber;
+                addmin.password=req.body.user.password;
+                addmin.contactNumber=req.body.user.contactNumber;
+                addmin.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
+                addmin.email=req.body.user.email;
+                addmin.nationalNumber=req.body.user.nationalNumber;
                  Admin_cont.add_admin(addmin);
-                res.send(addmin);
+                res.send({user: addmin});
             }
-            else if(req.body.UserType.localeCompare("Supervisor")){
+            else if(req.body.user.userType.localeCompare("Supervisor")){
                 let supervisor=new super_vis();
-                supervisor.id=req.body.id;
-                supervisor.firstName=req.body.firstName;
-                supervisor.lastName=req.body.lastName;
+                supervisor.id=req.body.user.id;
+                supervisor.firstName=req.body.user.firstName;
+                supervisor.lastName=req.body.user.lastName;
                 supervisor.username=supervisor.firstName+"_"+supervisor.lastName;
-                supervisor.password=req.body.password;
-                supervisor.contactNumber=req.body.contactNumber;
-                supervisor.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
-                supervisor.email=req.body.email;
-                supervisor.nationalNumber=req.body.nationalNumber;
+                supervisor.password=req.body.user.password;
+                supervisor.contactNumber=req.body.user.contactNumber;
+                supervisor.dateOfBirth=req.body.user.DayOfBirth+req.body.user.MonthOfBirth+req.body.user.yearofBirth;
+                supervisor.email=req.body.user.email;
+                supervisor.nationalNumber=req.body.user.nationalNumber;
                 Admin_cont.add_superavisor(supervisor);
             }
-            else if(req.body.UserType.localeCompare("Driver")){
+            else if(req.body.user.userType.localeCompare("Driver")){
                 let driver=new driv();
-                driver.id=req.body.id;
-                driver.firstName=req.body.firstName;
-                driver.lastName=req.body.lastName;
+                driver.id=req.body.user.id;
+                driver.firstName=req.body.user.firstName;
+                driver.lastName=req.body.user.lastName;
                 driver.username=driver.firstName+"_"+driver.lastName;
-                driver.password=req.body.password;
-                driver.contactNumber=req.body.contactNumber;
-                driver.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
-                driver.email=req.body.email;
-                driver.nationalNumber=req.body.nationalNumber;
+                driver.password=req.body.user.password;
+                driver.contactNumber=req.body.user.contactNumber;
+                driver.dateOfBirth=req.body.user.DayOfBirth+req.body.user.MonthOfBirth+req.body.user.yearofBirth;
+                driver.email=req.body.user.email;
+                driver.nationalNumber=req.body.user.nationalNumber;
 
                 Admin_cont.add_driver(driver);
             }

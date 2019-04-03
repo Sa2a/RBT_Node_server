@@ -1,6 +1,5 @@
 //import {Bus} from "../entity/Bus";
 
-const shuffle = require('shuffle-array');
 const Admin = require('../entity/Admin').Admin;
 const Driver = require('../entity/Driver').Driver;
 const bus = require('../entity/Bus').Bus;
@@ -96,18 +95,18 @@ let check_adimn=async function (id){
         return false;
     }
 }
-let check_admins_supervisor_driver_parent_student = async function (id)
+let check_admins_supervisor_driver_parent_student = async function (email)
 {
     let admin = await getConnection.getRepository(Admin);
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
     let parent= await getConnection.getRepository(Parent);
     let student = await getConnection.getRepository(Student);
-    let Ad= await admin.findOne(id);
-    let sup = await supervisor.findOne(id);
-    let driv = await driver.findOne(id);
-    let par= await parent.findOne(id);
-    let stud= await student.findOne(id);
+    let Ad= await admin.findOne({email:email});
+    let sup = await supervisor.findOne({email:email});
+    let driv = await driver.findOne({email:email});
+    let par= await parent.findOne({email:email});
+    let stud= await student.findOne({email:email});
 
 
     if(Ad==null&&sup==null&&driv==null&&par==null&&stud==null){
