@@ -12,35 +12,57 @@ const session = require('express-session');
 
 
 
-app.post('/get_add_admin', async (req, res) => {
+app.post('/add_user', async (req, res) => {
 
-    let addmin=new ad_();
-    addmin.id=req.body.id;
-    addmin.firstName=req.body.firstName;
-    addmin.lastName=req.body.lastName;
-    addmin.username=addmin.firstName+"_"+addmin.lastName;
-    addmin.password=req.body.password;
-    addmin.contactNumber=req.body.contactNumber;
-    addmin.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
-    addmin.email=req.body.email;
-    addmin.nationalNumber=req.body.nationalNumber;
 
-        Admin_cont.check_admins_supervisor_driver_parent_student(addmin.id).then((result)=>{
+
+        Admin_cont.check_admins_supervisor_driver_parent_student(req.body.username).then((result)=>{
         if(result==false){res.send(false)}
         else {
             if (req.body.UserType.localeCompare("Admin")) {
-
-                let add = Admin_cont.add_admin(addmin);
+                let addmin=new ad_();
+                addmin.id=req.body.id;
+                addmin.firstName=req.body.firstName;
+                addmin.lastName=req.body.lastName;
+                addmin.username=addmin.firstName+"_"+addmin.lastName;
+                addmin.password=req.body.password;
+                addmin.contactNumber=req.body.contactNumber;
+                addmin.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
+                addmin.email=req.body.email;
+                addmin.nationalNumber=req.body.nationalNumber;
+                 Admin_cont.add_admin(addmin);
                 res.send(addmin);
             }
             else if(req.body.UserType.localeCompare("Supervisor")){
-                let add=Admin_cont.add_superavisor(addmin);
+                let supervisor=new super_vis();
+                supervisor.id=req.body.id;
+                supervisor.firstName=req.body.firstName;
+                supervisor.lastName=req.body.lastName;
+                supervisor.username=supervisor.firstName+"_"+supervisor.lastName;
+                supervisor.password=req.body.password;
+                supervisor.contactNumber=req.body.contactNumber;
+                supervisor.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
+                supervisor.email=req.body.email;
+                supervisor.nationalNumber=req.body.nationalNumber;
+                Admin_cont.add_superavisor(supervisor);
             }
             else if(req.body.UserType.localeCompare("Driver")){
-                let add=Admin_cont.add_driver(addmin);
+                let driver=new driv();
+                driver.id=req.body.id;
+                driver.firstName=req.body.firstName;
+                driver.lastName=req.body.lastName;
+                driver.username=driver.firstName+"_"+driver.lastName;
+                driver.password=req.body.password;
+                driver.contactNumber=req.body.contactNumber;
+                driver.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
+                driver.email=req.body.email;
+                driver.nationalNumber=req.body.nationalNumber;
+
+                Admin_cont.add_driver(driver);
             }
             else{
                 let add=Admin_cont.add_parent(addmin);
+
             }
 
         }

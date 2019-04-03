@@ -66,7 +66,7 @@ let get_admins = async function ()
 let getparents=async function(){
     let ParentRepo=await getConnection.getRepository(Parent);
     let Parents=await ParentRepo.find();
-    return parents;}
+    return Parents;}
 
     ////get all drivers
 let getdrivers=async function(){
@@ -77,7 +77,7 @@ let getdrivers=async function(){
     ////get all supervisor
 let getsupervisor=async function(){
     let supervisorRepo=await getConnection.getRepository(Supervisor);
-    let supervis=await ParentRepo.find();
+    let supervis=await supervisorRepo.find();
     return supervis;}
 //review reports
 let review_reports=async function(){
