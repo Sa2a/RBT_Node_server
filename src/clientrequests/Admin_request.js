@@ -16,9 +16,9 @@ app.post('/add_user', async (req, res) => {
     console.log(req.body);
 
         Admin_cont.check_admins_supervisor_driver_parent_student(req.body.user.email).then((result)=>{
-        if(result==false){res.send(false)}
+        if(result==false){res.send({user:null});}
         else {
-            if (req.body.user.userType.localeCompare("Admin")) {
+           if (req.body.user.userType ==="admin") {
                 let addmin=new ad_();
                 addmin.id=req.body.user.id;
                 addmin.firstName=req.body.user.firstName;
@@ -32,7 +32,7 @@ app.post('/add_user', async (req, res) => {
                  Admin_cont.add_admin(addmin);
                 res.send({user: addmin});
             }
-            else if(req.body.user.userType.localeCompare("Supervisor")){
+            else if(req.body.user.userType=== "supervisor"){
                 let supervisor=new super_vis();
                 supervisor.id=req.body.user.id;
                 supervisor.firstName=req.body.user.firstName;
@@ -40,12 +40,13 @@ app.post('/add_user', async (req, res) => {
                 supervisor.username=supervisor.firstName+"_"+supervisor.lastName;
                 supervisor.password=req.body.user.password;
                 supervisor.contactNumber=req.body.user.contactNumber;
-                supervisor.dateOfBirth=req.body.user.DayOfBirth+req.body.user.MonthOfBirth+req.body.user.yearofBirth;
+                supervisor.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
                 supervisor.email=req.body.user.email;
                 supervisor.nationalNumber=req.body.user.nationalNumber;
                 Admin_cont.add_superavisor(supervisor);
+               res.send({user: supervisor});
             }
-            else if(req.body.user.userType.localeCompare("Driver")){
+            else if(req.body.user.userType === "driver"){
                 let driver=new driv();
                 driver.id=req.body.user.id;
                 driver.firstName=req.body.user.firstName;
@@ -53,22 +54,32 @@ app.post('/add_user', async (req, res) => {
                 driver.username=driver.firstName+"_"+driver.lastName;
                 driver.password=req.body.user.password;
                 driver.contactNumber=req.body.user.contactNumber;
-                driver.dateOfBirth=req.body.user.DayOfBirth+req.body.user.MonthOfBirth+req.body.user.yearofBirth;
+                driver.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
                 driver.email=req.body.user.email;
                 driver.nationalNumber=req.body.user.nationalNumber;
 
                 Admin_cont.add_driver(driver);
+               res.send({user: driver});
             }
             else{
-                let add=Admin_cont.add_parent(addmin);
-
+                let par=new parent();
+                par.id=req.body.user.id;
+                par.firstName=req.body.user.firstName;
+                par.lastName=req.body.user.lastName;
+                par.username=par.firstName+"_"+par.lastName;
+                par.password=req.body.user.password;
+                par.contactNumber=req.body.user.contactNumber;
+                par.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
+                par.email=req.body.user.email;
+                par.nationalNumber=req.body.user.nationalNumber;
+                Admin_cont.add_parent(par);
+               res.send({user:par});
             }
 
         }
     })
 
 });
-
 
 //add student
 app.post('/get_add_student', async (req, res) => {
@@ -95,73 +106,7 @@ app.post('/get_add_student', async (req, res) => {
 });
 
 
-/*app.get('/get_add_parent', async (req, res) => {
-    let p=new parent();
-    p.id=req.id;
-    p.username=req.body.username;
-    p.password=req.body.password;
 
-    p.email=req.body.email;
-    p.contactNumber=req.body.contactNumber;
-    p.nationalNumber=req.body.nationalNumber;
-    p.firstName=req.body.firstName;
-    p.lastName=req.body.lastName;
-    p.dateOfBirth=req.body.dateOfBirth;
-    let check=Admin_cont.check_admins_supervisor_driver_parent_student(p.id).then((result)=>{
-        if(result==false){res.send(false)}
-        else{
-            let add=Admin_cont.add_parent(p);
-            res.send(true);
-        }
-    })
-
-
-});
-
-app.get('/get_add_supervisor', async (req, res) => {
-    let sup_vis=new super_vis();
-    sup_vis.id=req.id;
-    sup_vis.username=req.body.username;
-    sup_vis.password=req.body.password;
-    sup_vis.firstName=req.body.firstName;
-    sup_vis.lastName=req.body.lastName;
-    sup_vis.email=req.body.email;
-    sup_vis.nationalNumber=req.body.nationalNumber;
-    sup_vis.dateOfBirth=req.body.dateOfBirth;
-    sup_vis.contactNumber=req.body.contactNumber;
-    sup_vis.bus=req.body.bus;
-
-    let check=Admin_cont.check_admins_supervisor_driver_parent_student(sup_vis.id).then((result)=>{
-        if(result==false){res.send(false)}
-        else{
-    let add=Admin_cont.add_superavisor(sup_vis);
-    res.send(add.then());
-        }
-    })
-});
-
-app.post('/get_add_driver', async (req, res) => {
-    let driver=new driv();
-    driver.id=req.id;
-    driver.username=req.body.username;
-    driver.password=req.body.password;
-    driver.firstName=req.body.firstName;
-    driver.lastName=req.body.lastName;
-    driver.dateOfBirth=req.body.dateOfBirth;
-    driver.email=req.body.email;
-    driver.contactNumber=req.body.contactNumber;
-    driver.nationalNumber=req.body.nationalNumber;
-    driver.bus=req.body.bus;
-
-    let check=Admin_cont.check_admins_supervisor_driver_parent_student(sup_vis.id).then((result)=>{
-        if(result==false){res.send(false)}
-        else{
-            let add=Admin_cont.add_driver(driver);
-            res.send(add);
-        }
-    })
-});
-*/
 app.post('/get_add_bus', async (req, res) => {
     let buses=new bus();
     buses.id=req.id;
@@ -211,15 +156,16 @@ app.get('/review_reports', async (req, res) => {
     });
 });
 
-app.get('/login',async  (req,res)=>{
-    Admin_cont.check_adimn().then (
+app.post('/login',async  (req,res)=>{
+    Admin_cont.check_adimn(req.body.email,req.body.password).then (
         (result=>{
-            if(result==true){
-              req.session.success=true;
+            if(result!=null){
+              req.session.user=result;
+                res.send({ user: result});
             }
             else {
-                req.session.success=false;
+                res.send({ user: null});
             }
         })
     )
-})
+});
