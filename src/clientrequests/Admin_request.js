@@ -19,7 +19,7 @@ app.post('/add_user', async (req, res) => {
         Admin_cont.check_admins_supervisor_driver_parent_student(req.body.username).then((result)=>{
         if(result==false){res.send(false)}
         else {
-            if (req.body.UserType.localeCompare("Admin")) {
+            if (req.body.UserType==="Admin") {
                 let addmin=new ad_();
                 addmin.id=req.body.id;
                 addmin.firstName=req.body.firstName;
@@ -33,7 +33,7 @@ app.post('/add_user', async (req, res) => {
                  Admin_cont.add_admin(addmin);
                 res.send(addmin);
             }
-            else if(req.body.UserType.localeCompare("Supervisor")){
+            else if(req.body.UserType==="Supervisor"){
                 let supervisor=new super_vis();
                 supervisor.id=req.body.id;
                 supervisor.firstName=req.body.firstName;
@@ -46,7 +46,7 @@ app.post('/add_user', async (req, res) => {
                 supervisor.nationalNumber=req.body.nationalNumber;
                 Admin_cont.add_superavisor(supervisor);
             }
-            else if(req.body.UserType.localeCompare("Driver")){
+            else if(req.body.UserType==="Driver"){
                 let driver=new driv();
                 driver.id=req.body.id;
                 driver.firstName=req.body.firstName;
