@@ -1,6 +1,5 @@
 //import {Bus} from "../entity/Bus";
 
-const shuffle = require('shuffle-array');
 const Admin = require('../entity/Admin').Admin;
 const Driver = require('../entity/Driver').Driver;
 const bus = require('../entity/Bus').Bus;
@@ -86,28 +85,28 @@ let review_reports=async function(){
     return repo;
 }
 // check admin
-let check_adimn=async function (id){
+let check_adimn=async function (email,password){
     let admin = await getConnection.getRepository(Admin);
-    let ad=await admin.findOne(id);
+    let ad=await admin.findOne({email,password});
     if(ad!=null){
-        return true;
+        return ad;
     }
     else {
-        return false;
+        return null;
     }
 }
-let check_admins_supervisor_driver_parent_student = async function (id)
+let check_admins_supervisor_driver_parent_student = async function (email)
 {
     let admin = await getConnection.getRepository(Admin);
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
     let parent= await getConnection.getRepository(Parent);
     let student = await getConnection.getRepository(Student);
-    let Ad= await admin.findOne(id);
-    let sup = await supervisor.findOne(id);
-    let driv = await driver.findOne(id);
-    let par= await parent.findOne(id);
-    let stud= await student.findOne(id);
+    let Ad= await admin.findOne({email:email});
+    let sup = await supervisor.findOne({email:email});
+    let driv = await driver.findOne({email:email});
+    let par= await parent.findOne({email:email});
+    let stud= await student.findOne({email:email});
 
 
     if(Ad==null&&sup==null&&driv==null&&par==null&&stud==null){
@@ -117,16 +116,129 @@ let check_admins_supervisor_driver_parent_student = async function (id)
       return false;
     }
 };
-let check_admin= async function(id){
+let find_user_by_email= async function(email,type){
     let admin = await getConnection.getRepository(Admin);
-    let ad=await admin.find(id);
-    if(ad!=null){
-        return true;
+    let supervisor = await getConnection.getRepository(Supervisor);
+    let driver = await getConnection.getRepository(Driver);
+    let parent= await getConnection.getRepository(Parent);
+    //let student = await getConnection.getRepository(Student);
+    let Ad= await admin.findOne({email:email});
+    let sup = await supervisor.findOne({email:email});
+    let drive = await driver.findOne({email:email});
+    let par= await parent.findOne({email:email});
+ //   let stud= await student.findOne({email:email});
+    if(Ad!=null&&type==="admin"){
+        return Ad;
     }
+    else if(sup!=null&&type==="supervisor"){
+        return sup;
+    }
+    else if(drive!=null&&type==="driver"){
+        return drive;
+    }
+    else if(par!=null&&type=="parent"){
+        return par;
+    }
+    /*else if(stud!=null){
+        return stud;
+    }*/
     else {
         return false;
     }
-}
+};
+
+let find_user_by_address= async function(address,type){
+    let admin = await getConnection.getRepository(Admin);
+    let supervisor = await getConnection.getRepository(Supervisor);
+    let driver = await getConnection.getRepository(Driver);
+    let parent= await getConnection.getRepository(Parent);
+    //let student = await getConnection.getRepository(Student);
+    let Ad= await admin.findOne({address:address});
+    let sup = await supervisor.findOne({address:address});
+    let drive = await driver.findOne({address:address});
+    let par= await parent.findOne({address:address});
+   // let stud= await student.findOne({address:address});
+    if(Ad!=null&&type==="admin"){
+        return Ad;
+    }
+    else if(sup!=null&&type==="supervisor"){
+        return sup;
+    }
+    else if(drive!=null&&type==="driver"){
+        return drive;
+    }
+    else if(par!=null&&type==="parent"){
+        return par;
+    }
+   /* else if(stud!=null&&type==="supervisor"){
+        return stud;
+    }*/
+    else {
+        return false;
+    }
+};
+
+let find_user_by_contact_number= async function(contact_number,type){
+    let admin = await getConnection.getRepository(Admin);
+    let supervisor = await getConnection.getRepository(Supervisor);
+    let driver = await getConnection.getRepository(Driver);
+    let parent= await getConnection.getRepository(Parent);
+    //let student = await getConnection.getRepository(Student);
+    let Ad= await admin.findOne({contactNumber:contact_number});
+    let sup = await supervisor.findOne({contactNumber:contact_number});
+    let drive = await driver.findOne({contactNumber:contact_number});
+    let par= await parent.findOne({contactNumber:contact_number});
+    //let stud= await student.findOne({contactNumber:contact_number});
+    if(Ad!=null&&type==="admin"){
+        return Ad;
+    }
+    else if(sup!=null&&type==="supervisor"){
+        return sup;
+    }
+    else if(drive!=&&type==="driver"){
+        return drive;
+    }
+    else if(par!=null&&type==="parent"){
+        return par;
+    }
+   /* else if(stud!=null){
+        return stud;
+    }*/
+    else {
+        return false;
+    }
+};
+
+let find_user_by_username= async function(Username,type){
+    let admin = await getConnection.getRepository(Admin);
+    let supervisor = await getConnection.getRepository(Supervisor);
+    let driver = await getConnection.getRepository(Driver);
+    let parent= await getConnection.getRepository(Parent);
+   // let student = await getConnection.getRepository(Student);
+    let Ad= await admin.findOne({Username:Username});
+    let sup = await supervisor.findOne({Username:Username});
+    let drive = await driver.findOne({Username:Username});
+    let par= await parent.findOne({Username:Username});
+   // let stud= await student.findOne({Username:Username});
+    if(Ad!=null&&type==="admin"){
+        return Ad;
+    }
+    else if(sup!=null&&type==="supervisor"){
+        return sup;
+    }
+    else if(drive!=null&&type==="driver"){
+        return drive;
+    }
+    else if(par!=null&&type==="parent"){
+        return par;
+    }
+    /*else if(stud!=null){
+        return stud;
+    }*/
+    else {
+        return false;
+    }
+};
 
 
 /*
@@ -309,6 +421,10 @@ module.exports ={
     getdrivers,
     getsupervisor,
     check_adimn,
+    find_user_by_username,
+    find_user_by_contact_number,
+    find_user_by_address,
+    find_user_by_email
 
 
   /*  findByCandidateAndExamAndPosition,

@@ -13,63 +13,73 @@ const session = require('express-session');
 
 
 app.post('/add_user', async (req, res) => {
+    console.log(req.body);
 
-
-
-        Admin_cont.check_admins_supervisor_driver_parent_student(req.body.username).then((result)=>{
-        if(result==false){res.send(false)}
+        Admin_cont.check_admins_supervisor_driver_parent_student(req.body.user.email).then((result)=>{
+        if(result==false){res.send({user:null});}
         else {
-            if (req.body.UserType==="Admin") {
+           if (req.body.user.userType ==="admin") {
                 let addmin=new ad_();
-                addmin.id=req.body.id;
-                addmin.firstName=req.body.firstName;
-                addmin.lastName=req.body.lastName;
+                addmin.id=req.body.user.id;
+                addmin.firstName=req.body.user.firstName;
+                addmin.lastName=req.body.user.lastName;
                 addmin.username=addmin.firstName+"_"+addmin.lastName;
-                addmin.password=req.body.password;
-                addmin.contactNumber=req.body.contactNumber;
-                addmin.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
-                addmin.email=req.body.email;
-                addmin.nationalNumber=req.body.nationalNumber;
+                addmin.password=req.body.user.password;
+                addmin.contactNumber=req.body.user.contactNumber;
+                addmin.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
+                addmin.email=req.body.user.email;
+                addmin.nationalNumber=req.body.user.nationalNumber;
                  Admin_cont.add_admin(addmin);
-                res.send(addmin);
+                res.send({user: addmin});
             }
-            else if(req.body.UserType==="Supervisor"){
+            else if(req.body.user.userType=== "supervisor"){
                 let supervisor=new super_vis();
-                supervisor.id=req.body.id;
-                supervisor.firstName=req.body.firstName;
-                supervisor.lastName=req.body.lastName;
+                supervisor.id=req.body.user.id;
+                supervisor.firstName=req.body.user.firstName;
+                supervisor.lastName=req.body.user.lastName;
                 supervisor.username=supervisor.firstName+"_"+supervisor.lastName;
-                supervisor.password=req.body.password;
-                supervisor.contactNumber=req.body.contactNumber;
-                supervisor.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
-                supervisor.email=req.body.email;
-                supervisor.nationalNumber=req.body.nationalNumber;
+                supervisor.password=req.body.user.password;
+                supervisor.contactNumber=req.body.user.contactNumber;
+                supervisor.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
+                supervisor.email=req.body.user.email;
+                supervisor.nationalNumber=req.body.user.nationalNumber;
                 Admin_cont.add_superavisor(supervisor);
+               res.send({user: supervisor});
             }
-            else if(req.body.UserType==="Driver"){
+            else if(req.body.user.userType === "driver"){
                 let driver=new driv();
-                driver.id=req.body.id;
-                driver.firstName=req.body.firstName;
-                driver.lastName=req.body.lastName;
+                driver.id=req.body.user.id;
+                driver.firstName=req.body.user.firstName;
+                driver.lastName=req.body.user.lastName;
                 driver.username=driver.firstName+"_"+driver.lastName;
-                driver.password=req.body.password;
-                driver.contactNumber=req.body.contactNumber;
-                driver.dateOfBirth=req.body.DayOfBirth+req.body.MonthOfBirth+req.body.yearofBirth;
-                driver.email=req.body.email;
-                driver.nationalNumber=req.body.nationalNumber;
+                driver.password=req.body.user.password;
+                driver.contactNumber=req.body.user.contactNumber;
+                driver.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
+                driver.email=req.body.user.email;
+                driver.nationalNumber=req.body.user.nationalNumber;
 
                 Admin_cont.add_driver(driver);
+               res.send({user: driver});
             }
             else{
-                let add=Admin_cont.add_parent(addmin);
-
+                let par=new parent();
+                par.id=req.body.user.id;
+                par.firstName=req.body.user.firstName;
+                par.lastName=req.body.user.lastName;
+                par.username=par.firstName+"_"+par.lastName;
+                par.password=req.body.user.password;
+                par.contactNumber=req.body.user.contactNumber;
+                par.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
+                par.email=req.body.user.email;
+                par.nationalNumber=req.body.user.nationalNumber;
+                Admin_cont.add_parent(par);
+               res.send({user:par});
             }
 
         }
     })
 
 });
-
 
 //add student
 app.post('/get_add_student', async (req, res) => {
@@ -96,73 +106,7 @@ app.post('/get_add_student', async (req, res) => {
 });
 
 
-/*app.get('/get_add_parent', async (req, res) => {
-    let p=new parent();
-    p.id=req.id;
-    p.username=req.body.username;
-    p.password=req.body.password;
 
-    p.email=req.body.email;
-    p.contactNumber=req.body.contactNumber;
-    p.nationalNumber=req.body.nationalNumber;
-    p.firstName=req.body.firstName;
-    p.lastName=req.body.lastName;
-    p.dateOfBirth=req.body.dateOfBirth;
-    let check=Admin_cont.check_admins_supervisor_driver_parent_student(p.id).then((result)=>{
-        if(result==false){res.send(false)}
-        else{
-            let add=Admin_cont.add_parent(p);
-            res.send(true);
-        }
-    })
-
-
-});
-
-app.get('/get_add_supervisor', async (req, res) => {
-    let sup_vis=new super_vis();
-    sup_vis.id=req.id;
-    sup_vis.username=req.body.username;
-    sup_vis.password=req.body.password;
-    sup_vis.firstName=req.body.firstName;
-    sup_vis.lastName=req.body.lastName;
-    sup_vis.email=req.body.email;
-    sup_vis.nationalNumber=req.body.nationalNumber;
-    sup_vis.dateOfBirth=req.body.dateOfBirth;
-    sup_vis.contactNumber=req.body.contactNumber;
-    sup_vis.bus=req.body.bus;
-
-    let check=Admin_cont.check_admins_supervisor_driver_parent_student(sup_vis.id).then((result)=>{
-        if(result==false){res.send(false)}
-        else{
-    let add=Admin_cont.add_superavisor(sup_vis);
-    res.send(add.then());
-        }
-    })
-});
-
-app.post('/get_add_driver', async (req, res) => {
-    let driver=new driv();
-    driver.id=req.id;
-    driver.username=req.body.username;
-    driver.password=req.body.password;
-    driver.firstName=req.body.firstName;
-    driver.lastName=req.body.lastName;
-    driver.dateOfBirth=req.body.dateOfBirth;
-    driver.email=req.body.email;
-    driver.contactNumber=req.body.contactNumber;
-    driver.nationalNumber=req.body.nationalNumber;
-    driver.bus=req.body.bus;
-
-    let check=Admin_cont.check_admins_supervisor_driver_parent_student(sup_vis.id).then((result)=>{
-        if(result==false){res.send(false)}
-        else{
-            let add=Admin_cont.add_driver(driver);
-            res.send(add);
-        }
-    })
-});
-*/
 app.post('/get_add_bus', async (req, res) => {
     let buses=new bus();
     buses.id=req.id;
@@ -212,15 +156,61 @@ app.get('/review_reports', async (req, res) => {
     });
 });
 
-app.get('/login',async  (req,res)=>{
-    Admin_cont.check_adimn().then (
+app.post('/login',async  (req,res)=>{
+    Admin_cont.check_adimn(req.body.email,req.body.password).then (
         (result=>{
-            if(result==true){
-              req.session.success=true;
+            if(result!=null){
+              req.session.user=result;
+                res.send({ user: result});
             }
             else {
-                req.session.success=false;
+                res.send({ user: null});
             }
         })
     )
+});
+
+app.post('/find_user',async (req,res)=>{
+        if(req.body.type==="email"){
+            Admin_cont.find_user_by_email(req.body.email,req.body.usertype).then(result=>{
+                if(result!=null){
+                    res.send({user:result});
+                }})
+                else{
+                    res.send({user:null});
+            }
+        }
+        else if (req.body.type==="address"){
+            Admin_cont.find_user_by_address(req.body.address,req.body.usertype).then(result=>{
+                if(result!=null){
+                    res.send({user:result});
+                }
+                else {
+                    res.send({user:null});
+                }
+            })
+        }
+        else if(req.body.type==="contact_number"){
+            Admin_cont.find_user_by_contact_number(req.body.address,req.body.usertype).then(result=>{
+                if(result!=null){
+                    res.send({user:result});
+                }
+                else {
+                    res.send({user:null});
+                }
+
+            })
+        }
+        else if(req.body.type==="username"){
+            Admin_cont.find_user_by_username(req.body.username,req.body.usertype).then(result=>{
+                if(result!=null){
+                    res.send({user:result});
+                }
+                else {
+                    res.send({user:null});
+                }
+
+            })
+        }
+
 })

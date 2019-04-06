@@ -1,4 +1,3 @@
-const shuffle = require('shuffle-array');
 const Admin = require('../entity/Admin').Admin;
 const Driver = require('../entity/Driver').Driver;
 const bus = require('../entity/Bus').Bus;

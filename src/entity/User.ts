@@ -13,7 +13,7 @@ export class User {
     lastName: string;
 
     @Column({length: 32})
-    username: string;
+    c: string;
 
     @Column({length: 32})
     password: string;
@@ -21,12 +21,12 @@ export class User {
     @Column({unique: true})
     email: string;
 
-    @Column()
+    @Column({unique:true})
     contactNumber: string;
 
     @Column()
-
     address: string;
+
     @Column('date')
     dateOfBirth: Date;
 
