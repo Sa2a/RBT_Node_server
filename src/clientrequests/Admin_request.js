@@ -169,3 +169,48 @@ app.post('/login',async  (req,res)=>{
         })
     )
 });
+
+app.post('/find_user',async (req,res)=>{
+        if(req.body.type==="email"){
+            Admin_cont.find_user_by_email(req.body.email,req.body.usertype).then(result=>{
+                if(result!=null){
+                    res.send({user:result});
+                }})
+                else{
+                    res.send({user:null});
+            }
+        }
+        else if (req.body.type==="address"){
+            Admin_cont.find_user_by_address(req.body.address,req.body.usertype).then(result=>{
+                if(result!=null){
+                    res.send({user:result});
+                }
+                else {
+                    res.send({user:null});
+                }
+            })
+        }
+        else if(req.body.type==="contact_number"){
+            Admin_cont.find_user_by_contact_number(req.body.address,req.body.usertype).then(result=>{
+                if(result!=null){
+                    res.send({user:result});
+                }
+                else {
+                    res.send({user:null});
+                }
+
+            })
+        }
+        else if(req.body.type==="username"){
+            Admin_cont.find_user_by_username(req.body.username,req.body.usertype).then(result=>{
+                if(result!=null){
+                    res.send({user:result});
+                }
+                else {
+                    res.send({user:null});
+                }
+
+            })
+        }
+
+})
