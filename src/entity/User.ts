@@ -30,6 +30,9 @@ export class User {
     @Column('date')
     dateOfBirth: Date;
 
+    @Column({length:32})
+    Type_of_user: String;
+
     @Column({unique:true})
     nationalNumber:string;
 }

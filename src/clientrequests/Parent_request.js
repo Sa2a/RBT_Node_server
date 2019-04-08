@@ -1,4 +1,7 @@
+
 const Parent_cont = require( "../databaserequests/Parent_controller");
+const supervisor_cont = require( "../databaserequests/Supervisor_controller");
+const driver_cont = require( "../databaserequests/Driver_contoller");
 const ad_=require("../entity/Admin").Admin;
 const student=require("../entity/Student").Student;
 const parent=require("../entity/Parent").Parent;
@@ -23,17 +26,36 @@ app.get('/add_report', async (req, res) => {
 
 //log in
 
-app.get('/log_in_parent', async (req,res)=>{
-    let p=new parent();
-    p.id=req.id;
-    p.username=req.username;
-    p.password=req.password;
-    let pr=Parent_cont.check(p).then(result=>{
+app.post('/log_in', async (req,res)=>{
+
+    var x=false;
+    console.log("Successful");
+    Parent_cont.check_parent(req.body.email,req.body.password).then(result=>{
         if(result!=null){
-       res.send(result);}
-        else{res.send(null)};
+       res.send(result);
+        x=true;}
+
+       });
+    supervisor_cont.check_supervisor(req.body.email,req.body.password).then(result=>{
+        if(result!=null){
+            res.send(result);
+            x=true;
+        }
+    })
+    driver_cont.check_driver(req.body.email,req.body.password).then(result=>{
+        if(result!=null){
+            res.send(result);
+            x=true;
+        }
+        if(x===false){
+            res.send(result);
+        }
+
+    })
+
+
     });
 
-});
+
 
 
