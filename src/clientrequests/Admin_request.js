@@ -1,3 +1,5 @@
+//import {Supervisor} from "../entity/Supervisor";
+
 const Admin_cont = require( "../databaserequests/Admin_controller");
 const ad_=require("../entity/Admin").Admin;
 const student=require("../entity/Student").Student;
@@ -13,12 +15,12 @@ const session = require('express-session');
 
 
 app.post('/add_user', async (req, res) => {
-    console.log(req.body);
+
 
         Admin_cont.check_admins_supervisor_driver_parent_student(req.body.user.email).then((result)=>{
         if(result==false){res.send({user:null});}
         else {
-           if (req.body.user.userType ==="admin") {
+          if (req.body.user.userType ==="admin") {
                 let addmin=new ad_();
                 addmin.id=req.body.user.id;
                 addmin.firstName=req.body.user.firstName;
@@ -43,6 +45,7 @@ app.post('/add_user', async (req, res) => {
                 supervisor.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
                 supervisor.email=req.body.user.email;
                 supervisor.nationalNumber=req.body.user.nationalNumber;
+                Supervisor.Type_of_user=Supervisor;
                 Admin_cont.add_superavisor(supervisor);
                res.send({user: supervisor});
             }
@@ -57,8 +60,9 @@ app.post('/add_user', async (req, res) => {
                 driver.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
                 driver.email=req.body.user.email;
                 driver.nationalNumber=req.body.user.nationalNumber;
+                driver.Type_of_user="driver";
 
-                Admin_cont.add_driver(driver);
+            Admin_cont.add_driver(driver);
                res.send({user: driver});
             }
             else{
@@ -73,7 +77,9 @@ app.post('/add_user', async (req, res) => {
                 par.email=req.body.user.email;
                 par.nationalNumber=req.body.user.nationalNumber;
                 Admin_cont.add_parent(par);
-               res.send({user:par});
+                 par.Type_of_user=req.body.user.UserType;
+
+            res.send({user:par});
             }
 
         }
@@ -172,13 +178,13 @@ app.post('/login',async  (req,res)=>{
 
 app.post('/find_user',async (req,res)=>{
         if(req.body.type==="email"){
-            Admin_cont.find_user_by_email(req.body.email,req.body.usertype).then(result=>{
-                if(result!=null){
-                    res.send({user:result});
-                }})
-                else{
-                    res.send({user:null});
-            }
+            Admin_cont.find_user_by_email(req.body.email,req.body.usertype).then(result=> {
+                if (result != null) {
+                    res.send({user: result});
+                } else {
+                    res.send({user: null});
+                }
+            })
         }
         else if (req.body.type==="address"){
             Admin_cont.find_user_by_address(req.body.address,req.body.usertype).then(result=>{
@@ -209,8 +215,6 @@ app.post('/find_user',async (req,res)=>{
                 else {
                     res.send({user:null});
                 }
-
             })
         }
-
 })
