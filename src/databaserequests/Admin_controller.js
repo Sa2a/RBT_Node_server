@@ -195,7 +195,7 @@ let find_user_by_contact_number= async function(contact_number,type){
     else if(sup!=null&&type==="supervisor"){
         return sup;
     }
-    else if(drive!=&&type==="driver"){
+    else if(drive!=null&&type==="driver"){
         return drive;
     }
     else if(par!=null&&type==="parent"){

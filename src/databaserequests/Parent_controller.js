@@ -19,25 +19,24 @@ let add_report=async function(report)
     await adminRep.save(report);
 }
 
-let check=async function(par){
+let check_parent=async function(email,password){
     let parRep=await connection.getRepository(Parent);
-    let existed = await parRep.findOne(par.id);
-    if(existed!=null){
-        if(existed.username==par.username&&existed.password==par.password){
-            return existed;
-        }
+    let existed = await parRep.findOne({email:email,password:password});
+    if(existed!=null) {
+        return existed;
+    }
         else {
-            return 0;
+            return null;
     }
 
     }
 
-}
+
 
 
 
 
 module.exports={
   add_report,
-    check
+    check_parent
 };
