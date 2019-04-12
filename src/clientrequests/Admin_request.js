@@ -30,6 +30,7 @@ app.post('/add_user', async (req, res) => {
                 addmin.contactNumber=req.body.user.contactNumber;
                 addmin.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
                 addmin.email=req.body.user.email;
+                addmin.address = req.body.user.address;
                 addmin.nationalNumber=req.body.user.nationalNumber;
                  Admin_cont.add_admin(addmin);
                 res.send({user: addmin});
@@ -44,6 +45,7 @@ app.post('/add_user', async (req, res) => {
                 supervisor.contactNumber=req.body.user.contactNumber;
                 supervisor.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
                 supervisor.email=req.body.user.email;
+                supervisor.address=req.body.user.address;
                 supervisor.nationalNumber=req.body.user.nationalNumber;
                 Supervisor.Type_of_user=Supervisor;
                 Admin_cont.add_superavisor(supervisor);
@@ -59,6 +61,7 @@ app.post('/add_user', async (req, res) => {
                 driver.contactNumber=req.body.user.contactNumber;
                 driver.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
                 driver.email=req.body.user.email;
+                driver.address=req.body.user.address;
                 driver.nationalNumber=req.body.user.nationalNumber;
                 driver.Type_of_user="driver";
 
@@ -75,6 +78,7 @@ app.post('/add_user', async (req, res) => {
                 par.contactNumber=req.body.user.contactNumber;
                 par.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
                 par.email=req.body.user.email;
+                par.address=req.body.user.address;
                 par.nationalNumber=req.body.user.nationalNumber;
                 Admin_cont.add_parent(par);
                  par.Type_of_user=req.body.user.UserType;
@@ -123,42 +127,42 @@ app.post('/get_add_bus', async (req, res) => {
     res.send(add);
 });
 
-app.get('/get_find_admins', async (req, res) => {
+app.post('/get_find_admins', async (req, res) => {
 
     Admin_cont.get_admins().then((result)=>{
         console.log(result);
-        res.send(result);
+        res.send({Users:result});
 
     });
 
 });
 
-app.get('get_find_parents',async (req,res)=>
+app.post('/get_find_parents',async (req,res)=>
 {
     Admin_cont.getparents().then((result) => {
         console.log(result);
-        res.send(result);
+        res.send({Users:result});
     })
 })
-app.get('get_find_drivers',async (req,res)=>
+app.post('/get_find_drivers',async (req,res)=>
 {
     Admin_cont.getdrivers().then((result) => {
         console.log(result);
-        res.send(result);
+        res.send({Users:result});
     })
 })
-app.get('get_find_supervisors',async (req,res)=>
+app.post('/get_find_supervisors',async (req,res)=>
 {
     Admin_cont.getsupervisor().then((result) => {
         console.log(result);
-        res.send(result);
+        res.send({Users:result});
     })
 })
-app.get('/review_reports', async (req, res) => {
+app.post('/review_reports', async (req, res) => {
 
     Admin_cont.review_reports().then((result)=>{
         console.log(result);
-        res.send(result);
+        res.send({Users:result});
     });
 });
 
