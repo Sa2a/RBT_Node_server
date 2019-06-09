@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="49fbcafd-186c-42bb-86c7-3babb6e1d6ca" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientrequests/Admin_request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientrequests/Admin_request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientrequests/Parent_request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientrequests/Parent_request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientrequests/Supervisor_requests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientrequests/Supervisor_requests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/databaserequests/Admin_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/databaserequests/Admin_controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/databaserequests/Parent_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/databaserequests/Parent_controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/databaserequests/Supervisor_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/databaserequests/Supervisor_controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Attendance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Attendance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Bus.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Bus.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Driver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Driver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Parent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Parent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Report.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Report.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Student.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Student.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Student.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Student.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Student.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Supervisor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Supervisor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/User.ts" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="RBT_Node_server" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/Bus.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/Supervisor.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="16" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#85#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/Driver.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+              <folding>
+                <element signature="e#0#85#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/Student.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="366">
+              <caret line="42" selection-start-line="42" selection-end-line="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/RoutePath.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+              <folding>
+                <element signature="e#0#76#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/clientrequests/Admin_request.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2224">
+              <caret line="144" column="7" lean-forward="true" selection-start-line="144" selection-start-column="7" selection-end-line="144" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/clientrequests/Admin_request_copy.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-414">
+              <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/Parent.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="e#0#74#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/Report.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
+              <folding>
+                <element signature="e#0#74#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Pug File" />
+        <option value="HTML File" />
+        <option value="TypeScript File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="ONTO" value="refs/remotes/origin/Ramez" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/views/first_page.html" />
+        <option value="$PROJECT_DIR$/views/first_page.pug" />
+        <option value="$PROJECT_DIR$/views/login.pug" />
+        <option value="$PROJECT_DIR$/views/add_admin.pug" />
+        <option value="$PROJECT_DIR$/views/admin_page.pug" />
+        <option value="$PROJECT_DIR$/views/addsupervisor.pug" />
+        <option value="$PROJECT_DIR$/views/adddriver.pug" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/model/admin.js" />
+        <option value="$PROJECT_DIR$/routes/admin.js" />
+        <option value="$PROJECT_DIR$/model/supervisor.js" />
+        <option value="$PROJECT_DIR$/model/driver.js" />
+        <option value="$PROJECT_DIR$/copy_app.js" />
+        <option value="$PROJECT_DIR$/database.js" />
+        <option value="$PROJECT_DIR$/src/entity/QuestionDetail.ts" />
+        <option value="$PROJECT_DIR$/src/entity/PArent.js" />
+        <option value="$PROJECT_DIR$/src/entity/Parent.js" />
+        <option value="$PROJECT_DIR$/src/entity/User.js" />
+        <option value="$PROJECT_DIR$/src/entity/Admin.ts" />
+        <option value="$PROJECT_DIR$/src/entity/Attendance.ts" />
+        <option value="$PROJECT_DIR$/src/entity/Report.ts" />
+        <option value="$PROJECT_DIR$/src/entity/Parent.ts" />
+        <option value="$PROJECT_DIR$/src/entity/Supervisor.ts" />
+        <option value="$PROJECT_DIR$/src/entity/Bus.ts" />
+        <option value="$PROJECT_DIR$/src/entity/Coordinates.ts" />
+        <option value="$PROJECT_DIR$/src/entity/RoutePath.ts" />
+        <option value="$PROJECT_DIR$/public/register.html" />
+        <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
+        <option value="$PROJECT_DIR$/src/clientrequests/TestReact.js" />
+        <option value="$PROJECT_DIR$/src/clientrequests/Supervisor_requests.js" />
+        <option value="$PROJECT_DIR$/src/clientrequests/Driver_requests.js" />
+        <option value="$PROJECT_DIR$/src/entity/Driver.ts" />
+        <option value="$PROJECT_DIR$/src/entity/User.ts" />
+        <option value="$PROJECT_DIR$/src/databaserequests/Parent_controller.js" />
+        <option value="$PROJECT_DIR$/src/databaserequests/Driver_contoller.js" />
+        <option value="$PROJECT_DIR$/src/databaserequests/Supervisor_controller.js" />
+        <option value="$PROJECT_DIR$/src/clientrequests/Parent_request.js" />
+        <option value="$PROJECT_DIR$/src/databaserequests/Admin_controller.js" />
+        <option value="$PROJECT_DIR$/ormconfig.json" />
+        <option value="$PROJECT_DIR$/src/app.js" />
+        <option value="$PROJECT_DIR$/src/entity/Student.ts" />
+        <option value="$PROJECT_DIR$/src/clientrequests/Admin_request.js" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="1378" />
+    <option name="height" value="745" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="RBT_Node_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RBT_Node_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RBT_Node_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RBT_Node_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RBT_Node_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="clientrequests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RBT_Node_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="databaserequests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RBT_Node_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="11.4.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../client" />
+    <property name="nodejs.protractor.protractor_package" value="" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2018.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$/bin/model" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\fci\project\GP\src\clientrequests" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\1_College\y4_T1\GP\busTracking Project\server\src\clientrequests" />
+      <recent name="E:\1_College\y4_T1\GP\busTracking Project\server\src\databaserequests" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Node.js.app.js">
+    <configuration name="app.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="src/app.js" working-dir="$PROJECT_DIR$">
+      <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
+        <browser url="http://localhost:5000" />
+      </EXTENSION>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.bin\www" />
+      <item itemvalue="Node.js.app.js" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.app.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="49fbcafd-186c-42bb-86c7-3babb6e1d6ca" name="Default Changelist" comment="" />
+      <created>1545695514071</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1545695514071</updated>
+      <workItem from="1545695520212" duration="4332000" />
+      <workItem from="1548502512578" duration="552000" />
+      <workItem from="1549893353688" duration="1274000" />
+      <workItem from="1550771291881" duration="997000" />
+      <workItem from="1550772679986" duration="596000" />
+      <workItem from="1550851065254" duration="1813000" />
+      <workItem from="1551018094847" duration="8982000" />
+      <workItem from="1551538732177" duration="23192000" />
+      <workItem from="1551652258310" duration="1012000" />
+      <workItem from="1551654597905" duration="13367000" />
+      <workItem from="1551731491860" duration="15028000" />
+      <workItem from="1551978380949" duration="11161000" />
+      <workItem from="1552086859994" duration="56868000" />
+      <workItem from="1552418455634" duration="7465000" />
+      <workItem from="1552490494781" duration="3535000" />
+      <workItem from="1552578455996" duration="5707000" />
+      <workItem from="1554025254250" duration="20727000" />
+      <workItem from="1554569606439" duration="3523000" />
+      <workItem from="1554663350690" duration="16641000" />
+      <workItem from="1555001048930" duration="3121000" />
+      <workItem from="1555067918915" duration="1484000" />
+      <workItem from="1555079308402" duration="3286000" />
+      <workItem from="1555098924315" duration="7571000" />
+      <workItem from="1555117470605" duration="198000" />
+      <workItem from="1555366133017" duration="1027000" />
+      <workItem from="1555411335555" duration="1267000" />
+      <workItem from="1555458328699" duration="339000" />
+      <workItem from="1555632372746" duration="1782000" />
+      <workItem from="1555901097324" duration="741000" />
+      <workItem from="1556895821703" duration="1485000" />
+      <workItem from="1557054495620" duration="1193000" />
+      <workItem from="1557077057442" duration="3277000" />
+      <workItem from="1558257955205" duration="13582000" />
+      <workItem from="1560045125560" duration="2566000" />
+      <workItem from="1560095214674" duration="5267000" />
+      <workItem from="1560107979476" duration="3139000" />
+    </task>
+    <task id="LOCAL-00001" summary="After adding some of admin controllers">
+      <created>1552171214960</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1552171214960</updated>
+    </task>
+    <task id="LOCAL-00002" summary="After adding parent ,supervisor and driver">
+      <created>1552311206269</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1552311206269</updated>
+    </task>
+    <task id="LOCAL-00003" summary="After adding search methods">
+      <created>1554509299056</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1554509299056</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Merge branch 'Ramez' of https://github.com/Sa2a/RBT_Node_server&#10;&#10;# Conflicts:&#10;#&#9;src/databaserequests/Admin_controller.js">
+      <created>1555001477637</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1555001477637</updated>
+    </task>
+    <task id="LOCAL-00005" summary="edit admin_request file">
+      <created>1555108035354</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1555108035354</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="255130000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20163691" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49925596" weight="0.32718894" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.66741073" weight="0.27858293" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4985119" weight="0.32850242" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49627978" weight="0.12077295" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.3325893" side_tool="true" visible="true" weight="0.27858293" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.6140119" weight="0.3186969" />
+      <window_info anchor="bottom" id="TypeScript" order="11" sideWeight="0.49966952" weight="0.3286119" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49925596" weight="0.32718894" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/entity/Bus.js.map" />
+        <option value="$PROJECT_DIR$/src/entity/Student.js.map" />
+        <option value="$PROJECT_DIR$/src/entity/Student.js" />
+        <option value="$PROJECT_DIR$/src/entity/Attendance.js.map" />
+        <option value="$PROJECT_DIR$/src/entity/Attendance.js" />
+        <option value="$PROJECT_DIR$/src/entity/Coordinates.js.map" />
+        <option value="$PROJECT_DIR$/src/entity/RoutePath.js" />
+        <option value="$PROJECT_DIR$/src/entity/Supervisor.js" />
+        <option value="$PROJECT_DIR$/src/entity/Bus.js" />
+        <option value="$PROJECT_DIR$/src/entity/RoutePath.js.map" />
+        <option value="$PROJECT_DIR$/src/entity/Parent.js" />
+        <option value="$PROJECT_DIR$/src/entity/Parent.js.map" />
+        <option value="$PROJECT_DIR$/src/entity/Supervisor.js.map" />
+        <option value="$PROJECT_DIR$/src/entity/User.js.map" />
+        <option value="$PROJECT_DIR$/src/entity/User.js" />
+        <option value="$PROJECT_DIR$/src/entity/Report.js" />
+        <option value="$PROJECT_DIR$/src/entity/Report.js.map" />
+        <option value="$PROJECT_DIR$/src/entity/Driver.js" />
+        <option value="$PROJECT_DIR$/src/entity/Coordinates.js" />
+        <option value="$PROJECT_DIR$/src/entity/Driver.js.map" />
+        <option value="$PROJECT_DIR$/src/entity/Admin.js" />
+        <option value="$PROJECT_DIR$/src/entity/Admin.js.map" />
+        <option value="E:/personal Projects/Cognitev/campaigns resource/src/entity/Campaign.js.map" />
+        <option value="E:/personal Projects/Cognitev/campaigns resource/src/entity/Campaign.js" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="entities database done" />
+    <MESSAGE value="After adding some of admin controllers" />
+    <MESSAGE value="After adding parent ,supervisor and driver" />
+    <MESSAGE value="After adding search methods" />
+    <MESSAGE value="Merge branch 'Ramez' of https://github.com/Sa2a/RBT_Node_server&#10;&#10;# Conflicts:&#10;#&#9;src/databaserequests/Admin_controller.js" />
+    <MESSAGE value="edit admin_request file" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit admin_request file" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/clientrequests/Admin_request.js</url>
+          <line>25</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/databaserequests/Admin_controller.js</url>
+          <line>19</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app.js</url>
+          <line>25</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/nodejs/11.2.0/core-modules/internal/modules/cjs/loader.js" />
+    <entry file="file://$PROJECT_DIR$/views/adddriver.pug" />
+    <entry file="file://$PROJECT_DIR$/views/first_page.pug" />
+    <entry file="file://$PROJECT_DIR$/views/addsupervisor.pug" />
+    <entry file="file://$PROJECT_DIR$/routes/users.js" />
+    <entry file="file://$PROJECT_DIR$/model/supervisor.js" />
+    <entry file="file://$PROJECT_DIR$/src/clientrequests/add_admin" />
+    <entry file="file://$PROJECT_DIR$/routes/admin.js" />
+    <entry file="file://$PROJECT_DIR$/model/admin.js" />
+    <entry file="file://$PROJECT_DIR$/model/driver.js" />
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database.js" />
+    <entry file="file://$PROJECT_DIR$/copy_app.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/typeorm/decorator/options/ColumnOptions.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="56" column="4" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/mysql/lib/protocol/Protocol.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="143" column="47" selection-start-line="143" selection-start-column="47" selection-end-line="143" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/tslib/tslib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="113" column="56" selection-start-line="113" selection-start-column="56" selection-end-line="113" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/www">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-752">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/register.html" />
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css" />
+    <entry file="file://$PROJECT_DIR$/node_modules/typeorm/error/QueryFailedError.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/typeorm/driver/mysql/MysqlQueryRunner.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="166" column="44" selection-start-line="166" selection-start-column="44" selection-end-line="166" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="617" column="23" selection-start-line="617" selection-start-column="23" selection-end-line="617" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Attendance.js.map">
+      <provider editor-type-id="sourcemapFileViewerProvider" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Coordinates.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitattributes">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/RouteBus.js.map" />
+    <entry file="file://$PROJECT_DIR$/src/entity/Admin.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="31" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clientrequests/Supervisor_requests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clientrequests/Driver_requests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databaserequests/Parent_controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clientrequests/Parent_request.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/User.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databaserequests/Driver_contoller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="12" selection-end-line="43" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databaserequests/Supervisor_controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databaserequests/Admin_controller_Copy.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databaserequests/Admin_controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Attendance.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ormconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/RoutePath.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Parent.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#0#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Report.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Student.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Bus.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Supervisor.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="16" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#85#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Driver.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#85#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clientrequests/Admin_request.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2224">
+          <caret line="144" column="7" lean-forward="true" selection-start-line="144" selection-start-column="7" selection-end-line="144" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clientrequests/Admin_request_copy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-414">
+          <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

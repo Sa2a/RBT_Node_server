@@ -10,4 +10,7 @@ export class Driver extends User{
 
     @ManyToOne(type => Bus, bus=>bus.drivers)
     bus:Bus;
+
+    @Column()
+    bus_numbers:String;
 }

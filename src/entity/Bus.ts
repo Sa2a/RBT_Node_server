@@ -16,7 +16,7 @@ export class Bus {
     @OneToMany(type => Student, stud=> stud.bus)
     students: Student[];
 
-    @OneToMany(type => Supervisor, supervisor=> supervisor.bus)
+    @OneToOne(type => Supervisor, supervisor=> supervisor.bus)
     supervisors: Supervisor[];
 
     @OneToMany(type => Driver, driver=> driver.bus)

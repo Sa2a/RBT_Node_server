@@ -1,15 +1,18 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
-import {Supervisor} from "./Supervisor";
 import {Student} from "./Student";
+
 
 @Entity()
 export class Attendance {
     @PrimaryGeneratedColumn()
     id: number;
-    @Column('datetime')
+    @Column('date')
     dateTime: Date;
-    @Column({unique:true})
+    @Column()
     email: string;
+    @Column()
+    student_name: string;
+
     @Column()
     status: boolean;
 

@@ -3,9 +3,9 @@
 const Admin = require('../entity/Admin').Admin;
 const Driver = require('../entity/Driver').Driver;
 const bus = require('../entity/Bus').Bus;
-const Student = require('../entity/Student').Student;
+const student = require('../entity/Student').Student;
 const Supervisor =require('../entity/Supervisor').Supervisor;
-const Report = require('../entity/Report').Report;
+const report = require('../entity/Report').Report;
 const Parent = require('../entity/Parent').Parent;
 const metadata = require("reflect-metadata");
 const getConnection = require("typeorm").getConnection();
@@ -26,6 +26,7 @@ let add_student=async function(stud)
 {
     let studentRep = await connection.getRepository(Student);
     await studentRep.save(stud);
+    return stud;
 }
 
 //add a new parent
@@ -67,23 +68,33 @@ let getparents=async function(){
     let Parents=await ParentRepo.find();
     return Parents;}
 
-////get all drivers
+    ////get all drivers
 let getdrivers=async function(){
     let DriverRepo=await getConnection.getRepository(Driver);
     let drivers=await DriverRepo.find();
     return drivers;}
 
-////get all supervisor
+    ////get all supervisor
 let getsupervisor=async function(){
     let supervisorRepo=await getConnection.getRepository(Supervisor);
     let supervis=await supervisorRepo.find();
     return supervis;}
 //review reports
 let review_reports=async function(){
-    let ParentRepo=await getConnection.getRepository(Report);
+    let ParentRepo=await getConnection.getRepository(report);
     let repo=await ParentRepo.find();
     return repo;
-}
+};
+//find report to answer
+let find_and_update_report=async function(email,answer){
+    let ParentRepo=await getConnection.getRepository(report);
+    let update=await  ParentRepo.createQueryBuilder().update(ParentRepo)
+        .set({ answer: answer})
+        .where( {User_mail:email,Ishidden:false})
+        .execute();
+    let after_update=await ParentRepo.findOne({email:email,answer:answer});
+    return after_update;
+};
 // check admin
 let check_adimn=async function (email,password){
     let admin = await getConnection.getRepository(Admin);
@@ -113,25 +124,29 @@ let check_admins_supervisor_driver_parent_student = async function (email)
         return true;
     }
     else{
-        return false;
+      return false;
     }
 };
+//let find_student_of_paent
 let find_user_by_email= async function(email,type){
     let admin = await getConnection.getRepository(Admin);
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
     let parent= await getConnection.getRepository(Parent);
-    //let student = await getConnection.getRepository(Student);
+    let student = await getConnection.getRepository(Student);
     let Ad= await admin.findOne({email:email});
     let sup = await supervisor.findOne({email:email});
     let drive = await driver.findOne({email:email});
     let par= await parent.findOne({email:email});
-    //   let stud= await student.findOne({email:email});
+   let stud= await student.findOne({email:email});
     if(Ad!=null&&type==="admin"){
         return Ad;
     }
     else if(sup!=null&&type==="supervisor"){
         return sup;
+    }
+    else if(stud!=null&&type==="student"){
+        return stud;
     }
     else if(drive!=null&&type==="driver"){
         return drive;
@@ -157,7 +172,7 @@ let find_user_by_address= async function(address,type){
     let sup = await supervisor.findOne({address:address});
     let drive = await driver.findOne({address:address});
     let par= await parent.findOne({address:address});
-    // let stud= await student.findOne({address:address});
+   let stud= await student.findOne({address:address});
     if(Ad!=null&&type==="admin"){
         return Ad;
     }
@@ -170,9 +185,9 @@ let find_user_by_address= async function(address,type){
     else if(par!=null&&type==="parent"){
         return par;
     }
-    /* else if(stud!=null&&type==="supervisor"){
-         return stud;
-     }*/
+   /* else if(stud!=null&&type==="supervisor"){
+        return stud;
+    }*/
     else {
         return false;
     }
@@ -201,9 +216,9 @@ let find_user_by_contact_number= async function(contact_number,type){
     else if(par!=null&&type==="parent"){
         return par;
     }
-    /* else if(stud!=null){
-         return stud;
-     }*/
+   /* else if(stud!=null){
+        return stud;
+    }*/
     else {
         return false;
     }
@@ -214,12 +229,12 @@ let find_user_by_username= async function(Username,type){
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
     let parent= await getConnection.getRepository(Parent);
-    // let student = await getConnection.getRepository(Student);
+   // let student = await getConnection.getRepository(Student);
     let Ad= await admin.findOne({Username:Username});
     let sup = await supervisor.findOne({Username:Username});
     let drive = await driver.findOne({Username:Username});
     let par= await parent.findOne({Username:Username});
-    // let stud= await student.findOne({Username:Username});
+   // let stud= await student.findOne({Username:Username});
     if(Ad!=null&&type==="admin"){
         return Ad;
     }
@@ -241,8 +256,14 @@ let find_user_by_username= async function(Username,type){
 };
 
 
+let add_report=async function(repo){
+    let report_connection=await getConnection.getRepository(report);
+    let add_answer=await report_connection.save(repo);
+    return add_answer;
+};
 /*
 ///////
+
 let findByCandidateAndPosition = async function (candidate,position)
 {
     let userExamRepo = await getConnection.getRepository(UserExams);
@@ -253,6 +274,8 @@ let findByCandidateAndPosition = async function (candidate,position)
         });
     return Exams;
 };
+
+
 let findByCandidateAndExamAndPosition =async function (candidate,exam,position)
 {
     let userExamRepo = await getConnection.getRepository(UserExams);
@@ -263,18 +286,29 @@ let findByCandidateAndExamAndPosition =async function (candidate,exam,position)
         });
     return Exams;
 };
+
+
 //Emitter.on("save",(userExam) =>{
 let save = async function (userExam){
     let userExamRepo = await getConnection.getRepository(UserExams);
     await userExamRepo.save(userExam);
 };
+
+
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 event.on('getUserGeneratedExam', async (req, res) => {
+
+
     //user exam should come from sessions
     // let exam = req.session.exam;
     // let candidate = req.session.candidate;
     // let exam = await connection.getRepository(Exam).findOne({name: req.body.examName}, {relations: ["questions"]});
     // let candidate = await connection.getRepository(Candidate).findOne({username: req.body.userName});
+
     let userExam = await getUserEx(req);
     let exam = userExam.exam;
     let status = false;
@@ -309,7 +343,11 @@ event.on('getUserGeneratedExam', async (req, res) => {
     //    console.log('timeOut')
     // });
     res.send({status: status, userExam: userExam});
+
 });
+
+
+
 // let getUserExam = ( examName, userName)=>{
 //     return typeorm.createConnection().then(async connection => {
 //         let exam = await connection.getRepository(Exam).findOne({name: examName},{ relations: ["questions"] });
@@ -320,6 +358,8 @@ event.on('getUserGeneratedExam', async (req, res) => {
 //         return userExam;
 //     }).catch(error => console.log(error));
 // };
+
+
 function getRandomElements(arr, numOfElements) {
     let returnArray = new Array(numOfElements);
     let chosenIndex;
@@ -333,9 +373,12 @@ function getRandomElements(arr, numOfElements) {
     }
     return returnArray;
 }
+
 function randomInt(low, high) {// low (inclusive) and high (exclusive) ([low, high
     return Math.floor(Math.random() * (high - low) + low)
 }
+
+
 let getUserExam = async (examName, userName) => {
     let exam = await connection.getRepository(Exam).findOne({name: examName}, {relations: ["questions"]});
     let candidate = await connection.getRepository(Candidate).findOne({username: userName});
@@ -343,11 +386,17 @@ let getUserExam = async (examName, userName) => {
         {relations: ["exam", "candidate", "precedence", "precedence.exam", "precedence.candidate",
                 "questions", "questions.question", "questions.chosenAnswer", "questions.answers"]});
 };
+
+
+
 let getUserEx = async (req) => {
     return await connection.manager.findOne(UserExams, {id: req.session.userExamID},
         {relations: ["exam","exam.questions", "candidate","precedence","precedence.exam","precedence.candidate", "questions", "questions.question", "questions.chosenAnswer", "questions.answers"]});
+
 };
 let updateSolvingUserExam = async (req)=> {
+
+
     //user exam should come from sessions
     let userExam = await getUserEx(req);
     let questionDetail = req.body.questionDetail;
@@ -355,7 +404,9 @@ let updateSolvingUserExam = async (req)=> {
     await connection.getRepository(QuestionDetail).update({userExam: userExam, question: questionDetail.question},
         {chosenAnswer: chosenAnsID});
 };
+
 let updateUserExamResults = async (req) => {
+
     let userExam =await getUserEx(req);
     let score = 0 ;
     let numOfQuestions= userExam.questions.length;
@@ -370,6 +421,7 @@ let updateUserExamResults = async (req) => {
         passed = true;
     }
     await connection.getRepository(UserExams).update({id:userExam.id},{passed:passed, score:score});
+
 };
 */
 
@@ -392,11 +444,14 @@ module.exports ={
     find_user_by_username,
     find_user_by_contact_number,
     find_user_by_address,
-    find_user_by_email
+    find_user_by_email,
+    add_report,
+    find_and_update_report
 
 
-    /*  findByCandidateAndExamAndPosition,
-      findByCandidateAndPosition,
-      getUserExam,updateSolvingUserExam, updateUserExamResults,getUserEx*/
+  /*  findByCandidateAndExamAndPosition,
+    findByCandidateAndPosition,
+
+    getUserExam,updateSolvingUserExam, updateUserExamResults,getUserEx*/
 
 };

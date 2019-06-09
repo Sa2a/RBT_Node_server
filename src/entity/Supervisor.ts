@@ -15,4 +15,6 @@ export class Supervisor extends User{
 
     @ManyToOne(type => Bus, bus=>bus.supervisors)
     bus:Bus;
+    @Column()
+    driver_username: string;
 }
