@@ -1,5 +1,9 @@
 //import {Supervisor} from "../entity/Supervisor";
 
+//import {Report} from "../entity/Report";
+
+//import {Report} from "../entity/Report";
+
 const Admin_cont = require( "../databaserequests/Admin_controller");
 const ad_=require("../entity/Admin").Admin;
 const student=require("../entity/Student").Student;
@@ -7,6 +11,7 @@ const parent=require("../entity/Parent").Parent;
 const super_vis=require("../entity/Supervisor").Supervisor;
 const driv=require("../entity/Driver").Driver;
 const bus=require("../entity/Bus").Bus;
+const report=require("../entity/Report").Report;
 const app = require("../app").app;
 const getConnection = require("typeorm").getConnection();
 const connection = getConnection;
@@ -65,6 +70,20 @@ app.post('/add_user', async (req, res) => {
             Admin_cont.add_driver(driver);
                res.send({user: driver});
             }
+            else if(req.body.user.userType === "Student"){
+              let stud=new student();
+              stud.name=req.body.name;
+              stud.parent_mail=req.body.parent_mail;
+              stud.age=req.body.age;
+              stud.bus=req.body.bus;
+              stud.classNumber=req.body.classNumber;
+              stud.level=req.body.level;
+              stud.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
+
+              Admin_cont.add_student(stud).then(result=>{
+                  res.send(result);
+              });
+          }
             else{
                 let par=new parent();
                 par.id=req.body.user.id;
@@ -88,30 +107,25 @@ app.post('/add_user', async (req, res) => {
 });
 
 //add student
-app.post('/get_add_student', async (req, res) => {
+/*app.get('/get_add_student', async (req, res) => {
     let stud=new student();
-    stud.id=req.body.id;
     stud.name=req.body.name;
-    stud.parent=req.body.parent;
+    stud.parent_mail=req.body.parent_mail;
     stud.age=req.body.age;
-    stud.attendances=req.body.attendances;
     stud.bus=req.body.bus;
     stud.classNumber=req.body.classNumber;
     stud.level=req.body.level;
-    stud.dateOfBirth=req.body.dateOfBirth;
-    stud.pickupCoordinate=req.body.pickupCoordinate;
-    stud.supervisor=req.body.supervisor;
-    let check=Admin_cont.check_admins_supervisor_driver_parent_student(stud.id).then((result)=>{
-        if(result==false){res.send(false)}
-        else{
-            let add=Admin_cont.add_student(stud);
-            res.send(add);
-        }
-    })
+    stud.dateOfBirth= new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
+
+            Admin_cont.add_student(stud).then(result=>{
+                res.send(result);
+            });
+
+
 
 });
 
-
+*/
 
 app.post('/get_add_bus', async (req, res) => {
     let buses=new bus();
@@ -122,7 +136,7 @@ app.post('/get_add_bus', async (req, res) => {
     let add=Admin_cont.add_buses(buses);
     res.send(add);
 });
-
+/*
 app.get('/get_find_admins', async (req, res) => {
 
     Admin_cont.get_admins().then((result)=>{
@@ -154,6 +168,7 @@ app.get('get_find_supervisors',async (req,res)=>
         res.send(result);
     })
 })
+*/
 app.get('/review_reports', async (req, res) => {
 
     Admin_cont.review_reports().then((result)=>{
@@ -161,7 +176,16 @@ app.get('/review_reports', async (req, res) => {
         res.send(result);
     });
 });
-
+app.get('/add_resp',async(req,res)=>{
+   let repo=new report();
+   repo.type=req.body.type;
+   repo.content=req.body.content;
+   repo.receiver_mail_or_id=req.body.email;
+   repo.User_mail="admin";
+   Admin_cont.add_report(repo).then(result=>{
+       res.send(result);
+   })
+});
 app.post('/login',async  (req,res)=>{
     Admin_cont.check_adimn(req.body.email,req.body.password).then (
         (result=>{
@@ -218,3 +242,19 @@ app.post('/find_user',async (req,res)=>{
             })
         }
 })
+
+app.post('/add_answer',async (req,res)=>{
+   Admin_cont.find_and_update_report("req.body.email","req.body.answer").then(result=>{res.send(result)})
+});
+
+app.post('/notification',async (req,res)=>{
+  let repo=new report();
+  repo.type=req.body.type;
+  repo.content="general";
+  repo.User_mail="admin";
+  repo.receiver_mail_or_id="parents";
+  Admin_cont.add_report(repo).then(result=>{
+      res.send(result);
+  })
+
+});

@@ -11,9 +11,22 @@ export class Report {
 
     @Column()
     content:String;
+   @Column()
+   answer:String;
+
+    @Column('date')
+    dateTime: Date;
+
+     @Column()
+     User_mail:String;
 
     @Column()
-    type:String;
+    Ishidden:boolean;
+    @Column()
+    first_time:boolean;
+
+     @Column()
+     receiver_mail_or_id:String;
 
     @ManyToOne(type => Parent, parent => parent.reports)
     parent: Parent;

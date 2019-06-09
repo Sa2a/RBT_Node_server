@@ -3,9 +3,9 @@
 const Admin = require('../entity/Admin').Admin;
 const Driver = require('../entity/Driver').Driver;
 const bus = require('../entity/Bus').Bus;
-const Student = require('../entity/Student').Student;
+const student = require('../entity/Student').Student;
 const Supervisor =require('../entity/Supervisor').Supervisor;
-const Report = require('../entity/Report').Report;
+const report = require('../entity/Report').Report;
 const Parent = require('../entity/Parent').Parent;
 const metadata = require("reflect-metadata");
 const getConnection = require("typeorm").getConnection();
@@ -26,6 +26,7 @@ let add_student=async function(stud)
 {
     let studentRep = await connection.getRepository(Student);
     await studentRep.save(stud);
+    return stud;
 }
 
 //add a new parent
@@ -80,10 +81,20 @@ let getsupervisor=async function(){
     return supervis;}
 //review reports
 let review_reports=async function(){
-    let ParentRepo=await getConnection.getRepository(Report);
+    let ParentRepo=await getConnection.getRepository(report);
     let repo=await ParentRepo.find();
     return repo;
-}
+};
+//find report to answer
+let find_and_update_report=async function(email,answer){
+    let ParentRepo=await getConnection.getRepository(report);
+    let update=await  ParentRepo.createQueryBuilder().update(ParentRepo)
+        .set({ answer: answer})
+        .where( {User_mail:email,Ishidden:false})
+        .execute();
+    let after_update=await ParentRepo.findOne({email:email,answer:answer});
+    return after_update;
+};
 // check admin
 let check_adimn=async function (email,password){
     let admin = await getConnection.getRepository(Admin);
@@ -116,22 +127,26 @@ let check_admins_supervisor_driver_parent_student = async function (email)
       return false;
     }
 };
+//let find_student_of_paent
 let find_user_by_email= async function(email,type){
     let admin = await getConnection.getRepository(Admin);
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
     let parent= await getConnection.getRepository(Parent);
-    //let student = await getConnection.getRepository(Student);
+    let student = await getConnection.getRepository(Student);
     let Ad= await admin.findOne({email:email});
     let sup = await supervisor.findOne({email:email});
     let drive = await driver.findOne({email:email});
     let par= await parent.findOne({email:email});
- //   let stud= await student.findOne({email:email});
+   let stud= await student.findOne({email:email});
     if(Ad!=null&&type==="admin"){
         return Ad;
     }
     else if(sup!=null&&type==="supervisor"){
         return sup;
+    }
+    else if(stud!=null&&type==="student"){
+        return stud;
     }
     else if(drive!=null&&type==="driver"){
         return drive;
@@ -157,7 +172,7 @@ let find_user_by_address= async function(address,type){
     let sup = await supervisor.findOne({address:address});
     let drive = await driver.findOne({address:address});
     let par= await parent.findOne({address:address});
-   // let stud= await student.findOne({address:address});
+   let stud= await student.findOne({address:address});
     if(Ad!=null&&type==="admin"){
         return Ad;
     }
@@ -241,6 +256,11 @@ let find_user_by_username= async function(Username,type){
 };
 
 
+let add_report=async function(repo){
+    let report_connection=await getConnection.getRepository(report);
+    let add_answer=await report_connection.save(repo);
+    return add_answer;
+};
 /*
 ///////
 
@@ -424,7 +444,9 @@ module.exports ={
     find_user_by_username,
     find_user_by_contact_number,
     find_user_by_address,
-    find_user_by_email
+    find_user_by_email,
+    add_report,
+    find_and_update_report
 
 
   /*  findByCandidateAndExamAndPosition,

@@ -10,5 +10,6 @@ export class Parent extends User{
 
     @OneToMany(type => Report, report => report.parent)
     reports: Report[];
-
+    @Column()
+    driver_username:String;
 }

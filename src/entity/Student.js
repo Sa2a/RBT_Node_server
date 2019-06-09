@@ -36,12 +36,24 @@ var Student = /** @class */ (function () {
     ], Student.prototype, "age", void 0);
     __decorate([
         typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Student.prototype, "address", void 0);
+    __decorate([
+        typeorm_1.Column(),
         __metadata("design:type", Number)
     ], Student.prototype, "classNumber", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", Number)
     ], Student.prototype, "level", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Student.prototype, "parent_mail", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Student.prototype, "supervisor_mail", void 0);
     __decorate([
         typeorm_1.ManyToOne(function (type) { return Parent_1.Parent; }, function (parent) { return parent.students; }),
         __metadata("design:type", Parent_1.Parent)

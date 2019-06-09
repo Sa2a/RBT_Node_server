@@ -16,10 +16,15 @@ export class Student {
     @Column()
     age: number;
     @Column()
+    address: String;
+    @Column()
     classNumber: number;
     @Column()
     level: number;
-
+    @Column()
+    parent_mail:String;
+    @Column()
+    supervisor_mail:String;
     @ManyToOne(type => Parent, parent => parent.students)
     parent: Parent;
 
