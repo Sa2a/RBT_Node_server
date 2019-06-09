@@ -10,17 +10,17 @@ export class Bus {
     @PrimaryGeneratedColumn()
     id:number;
 
-    @Column()
+    @Column({unique: true})
     bus_numbers:String;
 
     @OneToMany(type => Student, stud=> stud.bus)
     students: Student[];
 
     @OneToOne(type => Supervisor, supervisor=> supervisor.bus)
-    supervisors: Supervisor[];
+    supervisors: Supervisor;
 
-    @OneToMany(type => Driver, driver=> driver.bus)
-    drivers: Driver[];
+    @OneToOne(type => Driver, driver=> driver.bus)
+    drivers: Driver;
 
     @OneToOne(type => RoutePath)
     @JoinColumn()
