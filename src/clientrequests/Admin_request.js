@@ -20,11 +20,11 @@ const session = require('express-session');
 
 app.post('/add_bus',async (req,res)=>{
     let b=new bus();
-    b.bus_numbers=req.body.busNumber;
-  Admin_cont.find_driver(req.body.driverID).then((result)=>{
+    b.bus_numbers=req.body.bus.busNumber;
+  Admin_cont.find_driver(req.body.bus.driverID).then((result)=>{
         b.drivers=result;
     });
-  Admin_cont.find_supervisor(req.body.supervisorID).then((result)=>{
+  Admin_cont.find_supervisor(req.body.bus.supervisorID).then((result)=>{
       b.supervisors=result});
   Admin_cont.add_buses(b);
 
@@ -56,6 +56,7 @@ app.post('/add_user', async (req, res) => {
                 addmin.dateOfBirth= req.body.user.dateOfBirth;
                 addmin.email=req.body.user.email;
                 addmin.nationalNumber=req.body.user.nationalNumber;
+              addmin.address=req.body.user.address;
                  Admin_cont.add_admin(addmin);
                 res.send({user: addmin,status:true});
             }
@@ -70,7 +71,8 @@ app.post('/add_user', async (req, res) => {
                 supervisor.dateOfBirth= req.body.user.dateOfBirth;
                 supervisor.email=req.body.user.email;
                 supervisor.nationalNumber=req.body.user.nationalNumber;
-                Supervisor.Type_of_user=Supervisor;
+              supervisor.address=req.body.user.address;
+                Supervisor.Type_of_user=req.body.user.userType;
                 Admin_cont.add_superavisor(supervisor);
                res.send({user: supervisor,status:true});
             }
@@ -84,8 +86,9 @@ app.post('/add_user', async (req, res) => {
                 driver.contactNumber=req.body.user.contactNumber;
                 driver.dateOfBirth= req.body.user.dateOfBirth;
                 driver.email=req.body.user.email;
+              driver.address=req.body.user.address;
                 driver.nationalNumber=req.body.user.nationalNumber;
-                driver.Type_of_user="driver";
+                driver.Type_of_user=req.body.user.userType;
 
             Admin_cont.add_driver(driver);
                res.send({user: driver,status:true});
@@ -99,6 +102,7 @@ app.post('/add_user', async (req, res) => {
               stud.classNumber=req.body.classNumber;
               stud.level=req.body.level;
               stud.dateOfBirth=req.body.user.dateOfBirth;
+              stud.address=req.body.user.address;
 
               Admin_cont.add_student(stud)
                   res.send({user:stud,status:true});

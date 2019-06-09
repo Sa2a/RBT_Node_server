@@ -112,7 +112,6 @@ let check_admins_supervisor_driver_parent_student = async function (email)
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
     let parent= await getConnection.getRepository(Parent);
-    let student = await getConnection.getRepository(Student);
     let Ad= await admin.findOne({email:email});
     let sup = await supervisor.findOne({email:email});
     let driv = await driver.findOne({email:email});
@@ -120,7 +119,7 @@ let check_admins_supervisor_driver_parent_student = async function (email)
     let stud= await student.findOne({email:email});
 
 
-    if(Ad==null&&sup==null&&driv==null&&par==null&&stud==null){
+    if(Ad==null&&sup==null&&driv==null&&par==null){
         return true;
     }
     else{
