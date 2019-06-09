@@ -278,6 +278,7 @@ let get_supervisor_not_selected=async function(){
     let driv_not_selected=driv.find({bus:null});
     return driv_not_selected;
 }
+
 /*
 ///////
 
@@ -466,8 +467,8 @@ module.exports ={
     add_report,
     find_and_update_report,
     get_supervisor_not_selected,
-    get_driver_not_selected
-
+    get_driver_not_selected,
+    getdrivers
 
   /*  findByCandidateAndExamAndPosition,
     findByCandidateAndPosition,
