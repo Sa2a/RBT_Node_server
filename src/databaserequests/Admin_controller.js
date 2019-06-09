@@ -26,7 +26,7 @@ let add_student=async function(stud)
 {
     let studentRep = await connection.getRepository(Student);
     await studentRep.save(stud);
-    return stud;
+
 }
 
 //add a new parent
@@ -254,13 +254,32 @@ let find_user_by_username= async function(Username,type){
         return false;
     }
 };
-
+let find_driver=async function(email){
+    let driv=await getConnection.getRepository(Driver);
+    let dr=await driv.findOne({email:email});
+    return dr;
+}
+let find_supervisor=async function(email){
+    let super_visor=await getConnection.getRepository(Supervisor);
+    let dr=await super_visor.findOne({email:email});
+    return dr;
+}
 
 let add_report=async function(repo){
     let report_connection=await getConnection.getRepository(report);
     let add_answer=await report_connection.save(repo);
     return add_answer;
 };
+let get_driver_not_selected=async function(){
+    let driv=await getConnection.getRepository(Driver);
+    let driv_not_selected=driv.find({relations:['bus'], bus:null});
+    return driv_not_selected;
+}
+let get_supervisor_not_selected=async function(){
+    let driv=await getConnection.getRepository(Supervisor);
+    let driv_not_selected=driv.find({bus:null});
+    return driv_not_selected;
+}
 /*
 ///////
 
@@ -429,6 +448,7 @@ module.exports ={
     event,
     //save,
     add_admin,
+    find_supervisor,
     add_student,
     add_parent,
     add_superavisor,
@@ -438,7 +458,7 @@ module.exports ={
     get_admins,
     review_reports,
     check_admins_supervisor_driver_parent_student,
-    getdrivers,
+    find_driver,
     getsupervisor,
     check_adimn,
     find_user_by_username,
@@ -446,7 +466,9 @@ module.exports ={
     find_user_by_address,
     find_user_by_email,
     add_report,
-    find_and_update_report
+    find_and_update_report,
+    get_supervisor_not_selected,
+    get_driver_not_selected
 
 
   /*  findByCandidateAndExamAndPosition,
