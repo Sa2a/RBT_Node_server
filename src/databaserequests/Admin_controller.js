@@ -107,7 +107,7 @@ let check_user_by_national_namber=async function(national){
 //get all parents
 let getparents=async function(){
     let ParentRepo=await getConnection.getRepository(Parent);
-    let Parents=await ParentRepo.find();
+    let Parents=await ParentRepo.find({relation:['driver','supervisor','students','routePath']});
     return Parents;}
 
 ////get all drivers
@@ -294,14 +294,14 @@ let find_user_by_username= async function(Username,type){
         return false;
     }
 };
-let find_driver=async function(email){
+let find_driver=async function(id){
     let driv=await getConnection.getRepository(Driver);
-    let dr=await driv.findOne({email:email});
+    let dr=await driv.findOne({id:id});
     return dr;
 }
-let find_supervisor=async function(email){
+let find_supervisor=async function(id){
     let super_visor=await getConnection.getRepository(Supervisor);
-    let dr=await super_visor.findOne({email:email});
+    let dr=await super_visor.findOne({id:id});
     return dr;
 }
 

@@ -12,5 +12,5 @@ export class Driver extends User{
     bus:Bus;
 
     @Column()
-    bus_numbers:String;
+    bus_number:String;
 }

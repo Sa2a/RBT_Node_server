@@ -15,14 +15,14 @@ const session = require('express-session');
 app.post('/add_bus',async (req,res)=>{
     let b=new bus();
     b.bus_numbers=req.body.bus.busNumber;
-    Admin_cont.find_driver(req.body.bus.driverID).then((result)=>{
-        b.drivers=result;
-    });
-    Admin_cont.find_supervisor(req.body.bus.supervisorID).then((result)=>{
-        b.supervisors=result});
-    Admin_cont.add_buses(b);
+    b.driver=await Admin_cont.find_driver(req.body.bus.driverID);
+ b.supervisor= await Admin_cont.find_supervisor(req.body.bus.supervisorID);
 
+    Admin_cont.add_buses(b).then(result=>{
+        res.send({bus: result, status: true});
+    })
 })
+
 app.get ('/find_supervisor_not_selected',async(req,res)=>{
     Admin_cont.get_supervisor_not_selected().then((result)=>{
         res.send({supervisor:result});
