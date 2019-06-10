@@ -13,6 +13,9 @@ export class Bus {
     @Column({unique: true})
     bus_numbers:String;
 
+    @Column()
+    capacity: number;
+
     @OneToMany(type => Student, stud=> stud.bus)
     students: Student[];
 
@@ -22,7 +25,7 @@ export class Bus {
     @OneToOne(type => Driver, driver=> driver.bus)
     driver: Driver;
 
-    @OneToOne(type => RoutePath)
+    @OneToOne(type => RoutePath, routePath=> routePath.bus)
     @JoinColumn()
     routePath:RoutePath;
 }

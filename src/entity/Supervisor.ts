@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {User} from "./User";
 import {Student} from "./Student";
 import {Report} from "./Report";
@@ -13,8 +13,10 @@ export class Supervisor extends User{
     @OneToMany(type => Report, report => report.supervisor)
     reports: Report[];
 
-    @ManyToOne(type => Bus, bus=>bus.supervisors)
+    @OneToOne(type => Bus, bus=>bus.supervisor)
+    @JoinColumn()
     bus:Bus;
+
     @Column()
     driver_username: string;
 }

@@ -1,3 +1,5 @@
+const IsNull = require('typeorm').IsNull;
+
 const Admin = require('../entity/Admin').Admin;
 const Driver = require('../entity/Driver').Driver;
 const Bus = require('../entity/Bus').Bus;
@@ -58,8 +60,8 @@ let add_driver=async function(drive)
 //add bus
 let add_buses=async function(bus){
     let busRep=await connection.getRepository(Bus);
-    await busRep.save(bus);
-}
+    return await busRep.save(bus);
+};
 //get all admins
 let get_admins = async function ()
 {
@@ -105,10 +107,10 @@ let check_user_by_national_namber=async function(national){
     }
 }
 //get all parents
-let getparents=async function(){
-    let ParentRepo=await getConnection.getRepository(Parent);
-    let Parents=await ParentRepo.find({relation:['driver','supervisor','students','routePath']});
-    return Parents;}
+let get_buses=async function(){
+    let busRepo= await getConnection.getRepository(Bus);
+    let buses= await busRepo.find({relations:['driver','supervisor','students','routePath']});
+    return buses;}
 
 ////get all drivers
 let getdrivers=async function(){
@@ -312,12 +314,12 @@ let add_report=async function(repo){
 };
 let get_driver_not_selected=async function(){
     let driv=await getConnection.getRepository(Driver);
-    let driv_not_selected=driv.find({bus:null});
+    let driv_not_selected=await driv.find({where:{bus:IsNull()}});
     return driv_not_selected;
 }
 let get_supervisor_not_selected=async function(){
     let driv=await getConnection.getRepository(Supervisor);
-    let driv_not_selected=driv.find({bus:null});
+    let driv_not_selected=await driv.find({where:{bus: IsNull()}});
     return driv_not_selected;
 }
 
@@ -465,7 +467,7 @@ module.exports ={
     add_superavisor,
     add_driver,
     add_buses,
-    getparents,
+    get_buses,
     get_admins,
     review_reports,
     check_admins_supervisor_driver_parent_student,

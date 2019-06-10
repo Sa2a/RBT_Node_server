@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {User} from "./User";
 import {Report} from "./Report";
 import {Bus} from "./Bus";
@@ -9,6 +9,7 @@ export class Driver extends User{
     reports: Report[];
 
     @OneToOne(type => Bus, bus=>bus.driver)
+    @JoinColumn()
     bus:Bus;
 
     @Column()

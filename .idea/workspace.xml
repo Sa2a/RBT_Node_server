@@ -5,6 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientrequests/Admin_request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientrequests/Admin_request.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/databaserequests/Admin_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/databaserequests/Admin_controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Bus.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Bus.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Driver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Driver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Supervisor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Supervisor.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,38 +26,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/entity/Bus.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+            <state relative-caret-position="306">
+              <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bin/www">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-459">
-              <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ormconfig.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entity/Driver.ts">
+        <entry file="file://$PROJECT_DIR$/src/entity/Supervisor.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-              <folding>
-                <element signature="e#0#95#0" expanded="true" />
-              </folding>
+              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -62,8 +44,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/entity/Student.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
+            <state relative-caret-position="629">
               <caret line="42" selection-start-line="42" selection-end-line="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/Driver.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/clientrequests/Admin_request.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="112" column="39" lean-forward="true" selection-start-line="112" selection-start-column="39" selection-end-line="112" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -71,8 +80,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/entity/RoutePath.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+            <state relative-caret-position="51">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding>
                 <element signature="e#0#76#0" expanded="true" />
               </folding>
@@ -80,38 +89,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/clientrequests/Admin_request.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="149" column="4" selection-start-line="149" selection-start-column="4" selection-end-line="149" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/databaserequests/Admin_controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
+            <state relative-caret-position="5389">
+              <caret line="317" selection-start-line="317" selection-end-line="317" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/entity/Report.ts">
+        <entry file="file://$PROJECT_DIR$/src/entity/Attendance.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
+            <state relative-caret-position="119">
+              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
               <folding>
                 <element signature="e#0#74#0" expanded="true" />
               </folding>
@@ -135,6 +126,7 @@
     <findStrings>
       <find>find_driver</find>
       <find>getdrivers</find>
+      <find>get_buse</find>
     </findStrings>
   </component>
   <component name="Git.Rebase.Settings">
@@ -167,7 +159,6 @@
         <option value="$PROJECT_DIR$/src/entity/User.js" />
         <option value="$PROJECT_DIR$/src/entity/Admin.ts" />
         <option value="$PROJECT_DIR$/src/entity/Coordinates.ts" />
-        <option value="$PROJECT_DIR$/src/entity/RoutePath.ts" />
         <option value="$PROJECT_DIR$/public/register.html" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
         <option value="$PROJECT_DIR$/src/clientrequests/TestReact.js" />
@@ -181,12 +172,14 @@
         <option value="$PROJECT_DIR$/src/entity/Attendance.ts" />
         <option value="$PROJECT_DIR$/src/entity/Student.ts" />
         <option value="$PROJECT_DIR$/src/clientrequests/Parent_request.js" />
-        <option value="$PROJECT_DIR$/src/entity/Supervisor.ts" />
         <option value="$PROJECT_DIR$/src/entity/Report.ts" />
         <option value="$PROJECT_DIR$/src/databaserequests/Supervisor_controller.js" />
         <option value="$PROJECT_DIR$/src/clientrequests/Supervisor_requests.js" />
-        <option value="$PROJECT_DIR$/src/entity/Bus.ts" />
+        <option value="$PROJECT_DIR$/bin/www" />
+        <option value="$PROJECT_DIR$/src/entity/RoutePath.ts" />
         <option value="$PROJECT_DIR$/src/entity/Driver.ts" />
+        <option value="$PROJECT_DIR$/src/entity/Bus.ts" />
+        <option value="$PROJECT_DIR$/src/entity/Supervisor.ts" />
         <option value="$PROJECT_DIR$/src/databaserequests/Admin_controller.js" />
         <option value="$PROJECT_DIR$/src/clientrequests/Admin_request.js" />
       </list>
@@ -203,6 +196,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -247,7 +241,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -334,6 +327,7 @@
       <workItem from="1559000224529" duration="13872000" />
       <workItem from="1559438852365" duration="9168000" />
       <workItem from="1559571272283" duration="72649000" />
+      <workItem from="1560191309453" duration="1057000" />
     </task>
     <task id="LOCAL-00001" summary="After adding some of admin controllers">
       <created>1552171214960</created>
@@ -370,11 +364,25 @@
       <option name="project" value="LOCAL" />
       <updated>1560116331210</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Merge branches 'Ramez' and 'master' of https://github.com/Sa2a/RBT_Node_server&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/clientrequests/Admin_request.js&#10;#&#9;src/databaserequests/Admin_controller.js">
+      <created>1560129296741</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1560129296741</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Merge branches 'Ramez' and 'master' of https://github.com/Sa2a/RBT_Node_server&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/clientrequests/Admin_request.js&#10;#&#9;src/databaserequests/Admin_controller.js">
+      <created>1560129626595</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1560129626595</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="347315000" />
+    <option name="totallyTimeSpent" value="358592000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -386,24 +394,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="0" width="1378" height="745" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.83014864" visible="true" weight="0.20163691" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.83014864" visible="true" weight="0.20223881" />
       <window_info id="Structure" order="1" sideWeight="0.16985138" side_tool="true" weight="0.15003304" />
       <window_info id="npm" order="2" sideWeight="0.16135882" side_tool="true" weight="0.1473893" />
-      <window_info id="Favorites" order="3" side_tool="true" visible="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32850242" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6721745" weight="0.3188406" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.50033045" visible="true" weight="0.4057971" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.67014927" weight="0.36928105" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6365672" weight="0.30228758" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.32850242" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49966952" weight="0.30273753" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.32782552" side_tool="true" weight="0.33286119" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.6140119" weight="0.3186969" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.38656718" side_tool="true" visible="true" weight="0.31862745" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.6134328" visible="true" weight="0.31862745" />
       <window_info anchor="bottom" id="TypeScript" order="11" sideWeight="0.49966952" weight="0.3286119" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.4990086" weight="0.20963173" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -465,6 +472,20 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="entities database done" />
@@ -473,43 +494,30 @@
     <MESSAGE value="After adding search methods" />
     <MESSAGE value="after finishing supervisor ,parent and driver" />
     <MESSAGE value="updated_version_of_admin" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated_version_of_admin" />
+    <MESSAGE value="Merge branches 'Ramez' and 'master' of https://github.com/Sa2a/RBT_Node_server&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/clientrequests/Admin_request.js&#10;#&#9;src/databaserequests/Admin_controller.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branches 'Ramez' and 'master' of https://github.com/Sa2a/RBT_Node_server&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/clientrequests/Admin_request.js&#10;#&#9;src/databaserequests/Admin_controller.js" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/databaserequests/Admin_controller.js</url>
-          <line>271</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/databaserequests/Admin_controller.js</url>
-          <line>276</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/clientrequests/Admin_request.js</url>
-          <line>169</line>
-          <properties lambdaOrdinal="-1" />
+          <line>174</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/clientrequests/Admin_request.js</url>
-          <line>156</line>
-          <properties lambdaOrdinal="-1" />
+          <line>163</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/clientrequests/Admin_request.js</url>
-          <line>163</line>
-          <properties lambdaOrdinal="-1" />
+          <line>169</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/clientrequests/Admin_request.js</url>
-          <line>149</line>
-          <properties lambdaOrdinal="-1" />
+          <line>156</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
@@ -558,13 +566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/www">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-459">
-          <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore" />
     <entry file="file://$PROJECT_DIR$/public/register.html" />
     <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css" />
@@ -590,8 +591,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/entity/Attendance.js.map">
-      <provider editor-type-id="sourcemapFileViewerProvider" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="sourcemapFileViewerProvider" />
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitattributes">
       <provider selected="true" editor-type-id="text-editor">
@@ -616,14 +617,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../parallel/Tasks/VectorMatrixDotproduct.c" />
     <entry file="file://$PROJECT_DIR$/../../parallel/Tasks/send_max_2D_Array.c" />
-    <entry file="file://$PROJECT_DIR$/src/entity/Coordinates.ts">
+    <entry file="file://$PROJECT_DIR$/src/entity/RouteBus.js.map" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/nodejs/11.2.0/core-modules/internal/process/next_tick.js" />
+    <entry file="file://$PROJECT_DIR$/src/entity/Report.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        <state relative-caret-position="172">
+          <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#74#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/RouteBus.js.map" />
+    <entry file="file://$PROJECT_DIR$/src/entity/User.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/www">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/clientrequests/Driver_requests.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -631,24 +650,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/nodejs/11.2.0/core-modules/internal/process/next_tick.js" />
-    <entry file="file://$PROJECT_DIR$/src/entity/Admin.ts">
+    <entry file="file://$PROJECT_DIR$/src/clientrequests/Parent_request.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="364">
+          <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/Parent.ts">
+    <entry file="file://$PROJECT_DIR$/src/clientrequests/Supervisor_requests.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#74#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="287">
+          <caret line="66" column="26" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -659,10 +671,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/Attendance.ts">
+    <entry file="file://$PROJECT_DIR$/src/databaserequests/Parent_controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="74" selection-start-column="74" selection-end-column="74" />
+        <state relative-caret-position="104">
+          <caret line="106" column="2" lean-forward="true" selection-start-line="106" selection-start-column="2" selection-end-line="106" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -670,134 +682,102 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
-          <folding>
-            <element signature="e#665#1244#0" />
-            <element signature="e#1582#2201#0" />
-            <element signature="e#2195#2405#0" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/clientrequests/Supervisor_requests.js">
+    <entry file="file://$PROJECT_DIR$/src/entity/Coordinates.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="66" column="26" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-          <folding>
-            <element signature="e#962#1394#0" />
-            <element signature="e#1442#1622#0" />
-            <element signature="e#1670#1772#0" />
-          </folding>
+        <state relative-caret-position="187">
+          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/Supervisor.ts">
+    <entry file="file://$PROJECT_DIR$/src/entity/Parent.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="19" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#85#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/RoutePath.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/Student.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/Bus.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/Driver.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="e#0#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clientrequests/Parent_request.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
-          <folding>
-            <element signature="e#744#1148#0" />
-            <element signature="e#1199#1376#0" />
-            <element signature="e#1423#1517#0" />
-            <element signature="e#1599#1687#0" />
-            <element signature="e#1313#1439#0" />
-            <element signature="e#2535#2684#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databaserequests/Parent_controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="106" column="2" lean-forward="true" selection-start-line="106" selection-start-column="2" selection-end-line="106" selection-end-column="2" />
-          <folding>
-            <element signature="e#773#1009#0" />
-            <element signature="e#1051#1197#0" />
-            <element signature="e#1238#1505#0" />
-            <element signature="e#1492#2135#0" />
-            <element signature="e#2335#2890#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/Report.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
+        <state relative-caret-position="238">
+          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
           <folding>
             <element signature="e#0#74#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/User.ts">
+    <entry file="file://$PROJECT_DIR$/src/entity/Admin.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app.js">
+    <entry file="file://$PROJECT_DIR$/src/entity/Bus.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+        <state relative-caret-position="306">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Supervisor.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Student.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Driver.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/RoutePath.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#76#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/databaserequests/Admin_controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
+        <state relative-caret-position="5389">
+          <caret line="317" selection-start-line="317" selection-end-line="317" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/Attendance.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#74#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clientrequests/Admin_request.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="149" column="4" selection-start-line="149" selection-start-column="4" selection-end-line="149" selection-end-column="4" />
+        <state relative-caret-position="34">
+          <caret line="112" column="39" lean-forward="true" selection-start-line="112" selection-start-column="39" selection-end-line="112" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
         </state>
       </provider>
     </entry>
