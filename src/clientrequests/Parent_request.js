@@ -50,7 +50,7 @@ app.post('/check_abs',async(req,res)=>{
 
 })})
 //display
-    app.get('/display_info',async(req,res)=>{
+app.get('/display_info',async(req,res)=>{
         let email=req.body.email;
         Parent_cont.display_info(email).then(result=>{
         res.send(result);
