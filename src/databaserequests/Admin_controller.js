@@ -1,6 +1,6 @@
 const Admin = require('../entity/Admin').Admin;
 const Driver = require('../entity/Driver').Driver;
-const bus = require('../entity/Bus').Bus;
+const Bus = require('../entity/Bus').Bus;
 const student = require('../entity/Student').Student;
 const Supervisor =require('../entity/Supervisor').Supervisor;
 const report = require('../entity/Report').Report;
@@ -57,7 +57,7 @@ let add_driver=async function(drive)
 }
 //add bus
 let add_buses=async function(bus){
-    let busRep=await connection.getRepository(bus);
+    let busRep=await connection.getRepository(Bus);
     await busRep.save(bus);
 }
 //get all admins
@@ -105,10 +105,10 @@ let check_user_by_national_namber=async function(national){
     }
 }
 //get all parents
-let getparents=async function(){
-    let ParentRepo=await getConnection.getRepository(Parent);
-    let Parents=await ParentRepo.find({relation:['driver','supervisor','students','routePath']});
-    return Parents;}
+let get_buses=async function(){
+    let busRepo=await getConnection.getRepository(Bus);
+    let buses=await busRepo.find({relation:['driver','supervisor','students','routePath']});
+    return buses;}
 
 ////get all drivers
 let getdrivers=async function(){
@@ -465,7 +465,7 @@ module.exports ={
     add_superavisor,
     add_driver,
     add_buses,
-    getparents,
+    get_buses,
     get_admins,
     review_reports,
     check_admins_supervisor_driver_parent_student,

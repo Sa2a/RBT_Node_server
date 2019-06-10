@@ -13,7 +13,7 @@ export class Supervisor extends User{
     @OneToMany(type => Report, report => report.supervisor)
     reports: Report[];
 
-    @ManyToOne(type => Bus, bus=>bus.supervisors)
+    @ManyToOne(type => Bus, bus=>bus.supervisor)
     bus:Bus;
     @Column()
     driver_username: string;

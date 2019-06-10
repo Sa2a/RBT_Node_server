@@ -33,6 +33,11 @@ app.get('/find_driver_not_selected',async(req,res)=>{
         res.send({driver:result});
     })})
 
+app.get('/get_buses',async (req,res)=>{
+    Admin_cont.get_buses().then((result)=>{
+        res.send(result);
+    })
+})
 app.post('/add_user', async (req, res) => {
 
 
