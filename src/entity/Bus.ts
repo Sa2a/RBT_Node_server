@@ -17,10 +17,10 @@ export class Bus {
     students: Student[];
 
     @OneToOne(type => Supervisor, supervisor=> supervisor.bus)
-    supervisors: Supervisor;
+    supervisor: Supervisor;
 
     @OneToOne(type => Driver, driver=> driver.bus)
-    drivers: Driver;
+    driver: Driver;
 
     @OneToOne(type => RoutePath)
     @JoinColumn()

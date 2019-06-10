@@ -8,9 +8,9 @@ export class Driver extends User{
     @OneToMany(type => Report, report => report.driver)
     reports: Report[];
 
-    @OneToOne(type => Bus, bus=>bus.drivers)
+    @OneToOne(type => Bus, bus=>bus.driver)
     bus:Bus;
 
     @Column()
-    bus_numbers:String;
+    bus_number:String;
 }
