@@ -45,18 +45,17 @@ app.post('/add_user', async (req, res) => {
 
     let check_email = await Admin_cont.check_admins_supervisor_driver_parent_student(req.body.user.email);
     if (check_email == false) {
-        res.send({status: "Email is alredy exist"})
-    }
-    ;
+        res.send({status: "Email is already exist"})
+    };
     let check_by_contact = await Admin_cont.check_user_by_contact_number(req.body.user.contactNumber)
     if (check_by_contact == false) {
-        res.send({status: "The Contact_Numeber is alredy exist"})
+        res.send({status: "The Contact_Numeber is already exist"})
     }
     ;
 
     let check_by_national = await Admin_cont.check_user_by_national_namber(req.body.user.nationalNumber);
     if (check_by_national == false) {
-        res.send({status: "The National Number is alredy exist"})
+        res.send({status: "The National Number is already exist"})
     }
 
     if (req.body.user.userType === "admin") {
@@ -107,24 +106,10 @@ app.post('/add_user', async (req, res) => {
         Admin_cont.add_driver(driver).then(result => {
             res.send({user: result, status: true});
         })
-    } else if (req.body.user.userType === "Student") {
-        let stud = new student();
-        stud.name = req.body.name;
-        stud.parent_mail = req.body.parent_mail;
-        stud.age = req.body.age;
-        stud.bus = req.body.bus;
-        stud.classNumber = req.body.classNumber;
-        stud.level = req.body.level;
-        stud.dateOfBirth = req.body.user.dateOfBirth;
-        stud.address = req.body.user.address;
-
-        Admin_cont.add_student(stud).then(result => {
-            res.send({user: result, status: true})
-        });
-
-    } else {
+    }
+    else {
         let par = new parent();
-        par.id = req.body.user.id;
+        let students=[];
         par.firstName = req.body.user.firstName;
         par.lastName = req.body.user.lastName;
         par.username = par.firstName + "_" + par.lastName;
@@ -134,15 +119,25 @@ app.post('/add_user', async (req, res) => {
         par.email = req.body.user.email;
         par.nationalNumber = req.body.user.nationalNumber;
         par.address = req.body.user.address;
-        Admin_cont.add_parent(par);
-        par.Type_of_user = req.body.user.UserType;
-        Admin_cont.add_parent(par).then(result => {
-            res.send({user: result, status: true});
-        })
+        par.Type_of_user = req.body.user.userType;
+        for(let i=0;i<req.body.user.students.length;i++) {
+            let stud = new student();
+            stud.name = req.body.user.students[i].name;
+            stud.bus = await Admin_cont.find_bus(req.body.user.students[i].busId);
+            stud.classNumber = req.body.user.students[i].classNumber;
+            stud.level = req.body.user.students[i].level;
+            stud.dateOfBirth = req.body.user.students[i].dateOfBirth;
+            stud.address = req.body.user.students[i].address;
+            stud.parent = par;
+            await Admin_cont.add_student(stud);
+            students.push(stud);
+        }
+        par.students=students;
+        let add_par=await Admin_cont.add_parent(par);
+        res.send({user: add_par, status: true});
 
     }
 })
-
 //add student
 app.get('/get_add_student', async (req, res) => {
     let stud = new student();
@@ -166,7 +161,7 @@ app.get('/get_find_admins', async (req, res) => {
     });
 });
 app.get('/get_find_parents', async (req, res) => {
-    Admin_cont.getparents().then((result) => {
+    Admin_cont.get_parent().then((result) => {
         console.log(result);
         res.send({Users: result});
     })

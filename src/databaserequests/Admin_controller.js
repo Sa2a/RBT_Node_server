@@ -4,7 +4,7 @@ const Admin = require('../entity/Admin').Admin;
 const Driver = require('../entity/Driver').Driver;
 const Bus = require('../entity/Bus').Bus;
 const student = require('../entity/Student').Student;
-const Supervisor =require('../entity/Supervisor').Supervisor;
+const Supervisor = require('../entity/Supervisor').Supervisor;
 const report = require('../entity/Report').Report;
 const Parent = require('../entity/Parent').Parent;
 const metadata = require("reflect-metadata");
@@ -15,185 +15,136 @@ const eventEmitter = require("events");
 let event = new eventEmitter();
 
 // to add a new admin
-let add_admin=async function(admin)
-{
+let add_admin = async function (admin) {
     let adminRep = await connection.getRepository(Admin);
     await adminRep.save(admin);
-    let adm=await adminRep.findOne(admin);
+    let adm = await adminRep.findOne(admin);
     return adm;
 }
 
 // add a new student
-let add_student=async function(stud)
-{
+let add_student = async function (stud) {
     let studentRep = await connection.getRepository(student);
     await studentRep.save(stud);
-    let s=await studentRep.find(stud);
-    return s;
 }
 //add a new parent
-let add_parent=async function(par)
-{
+let add_parent = async function (par) {
     let studentRep = await connection.getRepository(Parent);
     await studentRep.save(par);
-    let adm=await studentRep.find(par);
+    let adm = await studentRep.find(par);
     return adm;
 }
 
 //add a new supervisor
-let add_superavisor=async function(sup)
-{
+let add_superavisor = async function (sup) {
     let studentRep = await connection.getRepository(Supervisor);
     await studentRep.save(sup);
-    let adm=await studentRep.find(sup);
+    let adm = await studentRep.find(sup);
     return adm;
 }
 
 //add a new driver
-let add_driver=async function(drive)
-{
+let add_driver = async function (drive) {
     let driver = await connection.getRepository(Driver);
     await driver.save(drive);
-    let adm=await driver.find(drive);
+    let adm = await driver.find(drive);
     return adm;
 }
 //add bus
-let add_buses=async function(bus){
-    let busRep=await connection.getRepository(Bus);
+let add_buses = async function (bus) {
+    let busRep = await connection.getRepository(Bus);
     return await busRep.save(bus);
 };
 //get all admins
-let get_admins = async function ()
-{
+let get_admins = async function () {
     let admin = await getConnection.getRepository(Admin);
     let Ad = await admin.find();
     return Ad;
 };
-let check_user_by_contact_number=async function(contact){
-    let adm=await getConnection.getRepository(Admin);
-    let sup=await getConnection.getRepository(Supervisor);
-    let driv=await getConnection.getRepository(Driver);
-    let par= await getConnection.getRepository(Parent);
-    let admin=adm.find({contactNumber:contact});
-    let supervis=sup.find({contactNumber:contact});
-    let parent=par.find({contactNumber:contact});
-    let driver= driv.find({contactNumber:contact});
-    if(admin!=null||supervis!=null||parent!=null||driver!=null){
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
-
-
-
-let check_user_by_national_namber=async function(national){
-    let adm=await getConnection.getRepository(Admin);
-    let sup=await getConnection.getRepository(Supervisor);
-    let driv=await getConnection.getRepository(Driver);
-    let par= await getConnection.getRepository(Parent);
-    let admin=adm.find({nationalNumber:national});
-    let supervis=sup.find({nationalNumber:national});
-    let parent=par.find({nationalNumber:national});
-    let driver= driv.find({nationalNumber:national});
-    if(admin!=null||supervis!=null||parent!=null||driver!=null){
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
 //get all parents
-let get_buses=async function(){
-    let busRepo= await getConnection.getRepository(Bus);
-    let buses= await busRepo.find({relations:['driver','supervisor','students','routePath']});
-    return buses;}
+let get_buses = async function () {
+    let busRepo = await getConnection.getRepository(Bus);
+    let buses = await busRepo.find({relations: ['driver', 'supervisor', 'students', 'routePath']});
+    return buses;
+}
 
 ////get all drivers
-let getdrivers=async function(){
-    let DriverRepo=await getConnection.getRepository(Driver);
-    let drivers=await DriverRepo.find();
-    return drivers;}
+let getdrivers = async function () {
+    let DriverRepo = await getConnection.getRepository(Driver);
+    let drivers = await DriverRepo.find();
+    return drivers;
+}
 
 ////get all supervisor
-let getsupervisor=async function(){
-    let supervisorRepo=await getConnection.getRepository(Supervisor);
-    let supervis=await supervisorRepo.find();
-    return supervis;}
+let getsupervisor = async function () {
+    let supervisorRepo = await getConnection.getRepository(Supervisor);
+    let supervis = await supervisorRepo.find();
+    return supervis;
+}
 //review reports
-let review_reports=async function(){
-    let ParentRepo=await getConnection.getRepository(report);
-    let repo=await ParentRepo.find();
+let review_reports = async function () {
+    let ParentRepo = await getConnection.getRepository(report);
+    let repo = await ParentRepo.find();
     return repo;
 };
 //find report to answer
-let find_and_update_report=async function(email,answer){
-    let ParentRepo=await getConnection.getRepository(report);
-    let update=await  ParentRepo.createQueryBuilder().update(ParentRepo)
-        .set({ answer: answer})
-        .where( {User_mail:email,Ishidden:false})
+let find_and_update_report = async function (email, answer) {
+    let ParentRepo = await getConnection.getRepository(report);
+    let update = await ParentRepo.createQueryBuilder().update(ParentRepo)
+        .set({answer: answer})
+        .where({User_mail: email, Ishidden: false})
         .execute();
-    let after_update=await ParentRepo.findOne({email:email,answer:answer});
+    let after_update = await ParentRepo.findOne({email: email, answer: answer});
     return after_update;
 };
 // check admin
-let check_adimn=async function (email,password){
+let check_adimn = async function (email, password) {
     let admin = await getConnection.getRepository(Admin);
-    let ad=await admin.findOne({email,password});
-    if(ad!=null){
+    let ad = await admin.findOne({email, password});
+    if (ad != null) {
         return ad;
-    }
-    else {
+    } else {
         return null;
     }
 }
-let check_admins_supervisor_driver_parent_student = async function (email)
-{
+let check_admins_supervisor_driver_parent_student = async function (email) {
     let admin = await getConnection.getRepository(Admin);
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
-    let parent= await getConnection.getRepository(Parent);
-    let Ad= await admin.findOne({email:email});
-    let sup = await supervisor.findOne({email:email});
-    let driv = await driver.findOne({email:email});
-    let par= await parent.findOne({email:email});
+    let parent = await getConnection.getRepository(Parent);
+    let Ad = await admin.findOne({email: email});
+    let sup = await supervisor.findOne({email: email});
+    let driv = await driver.findOne({email: email});
+    let par = await parent.findOne({email: email});
 
 
-    if(Ad==null&&sup==null&&driv==null&&par==null){
+    if (Ad == null && sup == null && driv == null && par == null) {
         return true;
-    }
-    else{
+    } else {
         return false;
     }
 };
 //let find_student_of_paent
-let find_user_by_email= async function(email,type){
+let find_user_by_email = async function (email, type) {
     let admin = await getConnection.getRepository(Admin);
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
-    let parent= await getConnection.getRepository(Parent);
+    let parent = await getConnection.getRepository(Parent);
     let student = await getConnection.getRepository(Student);
-    let Ad= await admin.findOne({email:email});
-    let sup = await supervisor.findOne({email:email});
-    let drive = await driver.findOne({email:email});
-    let par= await parent.findOne({email:email});
-    let stud= await student.findOne({email:email});
-    if(Ad!=null&&type==="admin"){
+    let Ad = await admin.findOne({email: email});
+    let sup = await supervisor.findOne({email: email});
+    let drive = await driver.findOne({email: email});
+    let par = await parent.findOne({email: email});
+    let stud = await student.findOne({email: email});
+    if (Ad != null && type === "admin") {
         return Ad;
-    }
-    else if(sup!=null&&type==="supervisor"){
+    } else if (sup != null && type === "supervisor") {
         return sup;
-    }
-    else if(stud!=null&&type==="student"){
+    } else if (stud != null && type === "student") {
         return stud;
-    }
-    else if(drive!=null&&type==="driver"){
+    } else if (drive != null && type === "driver") {
         return drive;
-    }
-    else if(par!=null&&type=="parent"){
+    } else if (par != null && type == "parent") {
         return par;
     }
     /*else if(stud!=null){
@@ -204,27 +155,24 @@ let find_user_by_email= async function(email,type){
     }
 };
 
-let find_user_by_address= async function(address,type){
+let find_user_by_address = async function (address, type) {
     let admin = await getConnection.getRepository(Admin);
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
-    let parent= await getConnection.getRepository(Parent);
+    let parent = await getConnection.getRepository(Parent);
     //let student = await getConnection.getRepository(Student);
-    let Ad= await admin.findOne({address:address});
-    let sup = await supervisor.findOne({address:address});
-    let drive = await driver.findOne({address:address});
-    let par= await parent.findOne({address:address});
-    let stud= await student.findOne({address:address});
-    if(Ad!=null&&type==="admin"){
+    let Ad = await admin.findOne({address: address});
+    let sup = await supervisor.findOne({address: address});
+    let drive = await driver.findOne({address: address});
+    let par = await parent.findOne({address: address});
+    let stud = await student.findOne({address: address});
+    if (Ad != null && type === "admin") {
         return Ad;
-    }
-    else if(sup!=null&&type==="supervisor"){
+    } else if (sup != null && type === "supervisor") {
         return sup;
-    }
-    else if(drive!=null&&type==="driver"){
+    } else if (drive != null && type === "driver") {
         return drive;
-    }
-    else if(par!=null&&type==="parent"){
+    } else if (par != null && type === "parent") {
         return par;
     }
     /* else if(stud!=null&&type==="supervisor"){
@@ -235,27 +183,24 @@ let find_user_by_address= async function(address,type){
     }
 };
 
-let find_user_by_contact_number= async function(contact_number,type){
+let find_user_by_contact_number = async function (contact_number, type) {
     let admin = await getConnection.getRepository(Admin);
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
-    let parent= await getConnection.getRepository(Parent);
+    let parent = await getConnection.getRepository(Parent);
     //let student = await getConnection.getRepository(Student);
-    let Ad= await admin.findOne({contactNumber:contact_number});
-    let sup = await supervisor.findOne({contactNumber:contact_number});
-    let drive = await driver.findOne({contactNumber:contact_number});
-    let par= await parent.findOne({contactNumber:contact_number});
+    let Ad = await admin.findOne({contactNumber: contact_number});
+    let sup = await supervisor.findOne({contactNumber: contact_number});
+    let drive = await driver.findOne({contactNumber: contact_number});
+    let par = await parent.findOne({contactNumber: contact_number});
     //let stud= await student.findOne({contactNumber:contact_number});
-    if(Ad!=null&&type==="admin"){
+    if (Ad != null && type === "admin") {
         return Ad;
-    }
-    else if(sup!=null&&type==="supervisor"){
+    } else if (sup != null && type === "supervisor") {
         return sup;
-    }
-    else if(drive!=null&&type==="driver"){
+    } else if (drive != null && type === "driver") {
         return drive;
-    }
-    else if(par!=null&&type==="parent"){
+    } else if (par != null && type === "parent") {
         return par;
     }
     /* else if(stud!=null){
@@ -266,27 +211,24 @@ let find_user_by_contact_number= async function(contact_number,type){
     }
 };
 
-let find_user_by_username= async function(Username,type){
+let find_user_by_username = async function (Username, type) {
     let admin = await getConnection.getRepository(Admin);
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
-    let parent= await getConnection.getRepository(Parent);
+    let parent = await getConnection.getRepository(Parent);
     // let student = await getConnection.getRepository(Student);
-    let Ad= await admin.findOne({Username:Username});
-    let sup = await supervisor.findOne({Username:Username});
-    let drive = await driver.findOne({Username:Username});
-    let par= await parent.findOne({Username:Username});
+    let Ad = await admin.findOne({Username: Username});
+    let sup = await supervisor.findOne({Username: Username});
+    let drive = await driver.findOne({Username: Username});
+    let par = await parent.findOne({Username: Username});
     // let stud= await student.findOne({Username:Username});
-    if(Ad!=null&&type==="admin"){
+    if (Ad != null && type === "admin") {
         return Ad;
-    }
-    else if(sup!=null&&type==="supervisor"){
+    } else if (sup != null && type === "supervisor") {
         return sup;
-    }
-    else if(drive!=null&&type==="driver"){
+    } else if (drive != null && type === "driver") {
         return drive;
-    }
-    else if(par!=null&&type==="parent"){
+    } else if (par != null && type === "parent") {
         return par;
     }
     /*else if(stud!=null){
@@ -296,33 +238,78 @@ let find_user_by_username= async function(Username,type){
         return false;
     }
 };
-let find_driver=async function(id){
-    let driv=await getConnection.getRepository(Driver);
-    let dr=await driv.findOne({id:id});
+let find_driver = async function (id) {
+    let driv = await getConnection.getRepository(Driver);
+    let dr = await driv.findOne({id: id});
     return dr;
 }
-let find_supervisor=async function(id){
-    let super_visor=await getConnection.getRepository(Supervisor);
-    let dr=await super_visor.findOne({id:id});
+let find_supervisor = async function (id) {
+    let super_visor = await getConnection.getRepository(Supervisor);
+    let dr = await super_visor.findOne({id: id});
     return dr;
 }
 
-let add_report=async function(repo){
-    let report_connection=await getConnection.getRepository(report);
-    let add_answer=await report_connection.save(repo);
+let add_report = async function (repo) {
+    let report_connection = await getConnection.getRepository(report);
+    let add_answer = await report_connection.save(repo);
     return add_answer;
 };
-let get_driver_not_selected=async function(){
-    let driv=await getConnection.getRepository(Driver);
-    let driv_not_selected=await driv.find({where:{bus:IsNull()}});
+let get_driver_not_selected = async function () {
+    let driv = await getConnection.getRepository(Driver);
+    let driv_not_selected = await driv.find({where: {bus: IsNull()}});
     return driv_not_selected;
 }
-let get_supervisor_not_selected=async function(){
-    let driv=await getConnection.getRepository(Supervisor);
-    let driv_not_selected=await driv.find({where:{bus: IsNull()}});
+let get_supervisor_not_selected = async function () {
+    let driv = await getConnection.getRepository(Supervisor);
+    let driv_not_selected = await driv.find({where: {bus: IsNull()}});
     return driv_not_selected;
+}
+let get_parent = async function () {
+    let parent = await getConnection.getRepository(Parent);
+    let parents = await parent.find({relations: ['students', 'reports']});
+    return parents;
 }
 
+let check_user_by_national_namber = async function (national) {
+    let admin = await getConnection.getRepository(Admin);
+    let supervisor = await getConnection.getRepository(Supervisor);
+    let driver = await getConnection.getRepository(Driver);
+    let parent = await getConnection.getRepository(Parent);
+    let Ad = await admin.findOne({nationalNumber: national});
+    let sup = await supervisor.findOne({nationalNumber: national});
+    let driv = await driver.findOne({nationalNumber: national});
+    let par = await parent.findOne({nationalNumber: national});
+
+
+    if (Ad == null && sup == null && driv == null && par == null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+let check_user_by_contact_number = async function (contact) {
+
+    let admin = await getConnection.getRepository(Admin);
+    let supervisor = await getConnection.getRepository(Supervisor);
+    let driver = await getConnection.getRepository(Driver);
+    let parent = await getConnection.getRepository(Parent);
+    let Ad = await admin.findOne({contactNumber: contact});
+    let sup = await supervisor.findOne({contactNumber: contact});
+    let driv = await driver.findOne({contactNumber: contact});
+    let par = await parent.findOne({contactNumber: contact});
+
+
+    if (Ad == null && sup == null && driv == null && par == null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+let find_bus = async function (id) {
+    let bus = await getConnection.getRepository(Bus);
+    let b = bus.findOne({id: id});
+    return b;
+}
 /*
 ///////
 let findByCandidateAndPosition = async function (candidate,position)
@@ -455,7 +442,7 @@ let updateUserExamResults = async (req) => {
 };
 */
 
-module.exports ={
+module.exports = {
     event,
     check_user_by_contact_number,
     check_user_by_national_namber,
@@ -482,7 +469,9 @@ module.exports ={
     find_and_update_report,
     get_supervisor_not_selected,
     get_driver_not_selected,
-    getdrivers
+    getdrivers,
+    get_parent,
+    find_bus
 
     /*  findByCandidateAndExamAndPosition,
       findByCandidateAndPosition,

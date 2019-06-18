@@ -5,14 +5,22 @@ import {RoutePath} from "./RoutePath";
 export class Coordinates {
 
     @PrimaryGeneratedColumn()
-    id:number;
+    id: number;
+
+    //for pickUp points only
+    @Column()
+    label: string;
+
+    //for pickUp points only
+    @Column()
+    address: string;
 
     @Column('double')
-    latitude:number;
+    latitude: number;
 
     @Column('double')
-    longitude:number;
+    longitude: number;
 
-    @ManyToOne(type => RoutePath, routePath =>routePath.coordinates)
+    @ManyToOne(type => RoutePath, routePath => routePath.coordinates)
     routePath: RoutePath;
 }
