@@ -6,6 +6,11 @@ const bodyParser = require('body-parser');
 const path = require("path");
 let createConnection = require("typeorm").createConnection();
 
+const http = require("http");
+const socketIo = require("socket.io");
+
+
+
 createConnection.then(()=> {
     let location = path.join(__dirname,"../public");
     console.log(location);
@@ -32,14 +37,35 @@ createConnection.then(()=> {
         console.log("application has started on port 5000");
     });
 
+
+    const port = process.env.PORT || 5001;
+   /* const index = require("./clientrequests/testio");
+    app.use(index);*/
+    const server = http.createServer(app);
+    const io = socketIo(server); // < Interesting!
+
+    server.listen(port, () => console.log(`Socket io Listening on port ${port}`));
+// firebase
+    let admin = require("firebase-admin");
+    let serviceAccount = require("./../serviceAccountKey");
+
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: "https://realtimebustracking-8ad63.firebaseio.com"
+    });
+
+    let db = admin.database();
     module.exports ={
-        app,path
+        app,path,
+        db,
+        io
     };
 
-    const admin = require("./clientrequests/Admin_request");
-    const parent = require("./clientrequests/Parent_request");
-    const supervisor = require("./clientrequests/Supervisor_requests");
-    const driver = require("./clientrequests/Driver_requests");
+    require("./clientrequests/Admin_request");
+    require("./clientrequests/Parent_request");
+    require("./clientrequests/Supervisor_requests");
+    require("./clientrequests/Driver_requests");
+    require("./clientrequests/Tracking");
 
 
 }).catch(error => {

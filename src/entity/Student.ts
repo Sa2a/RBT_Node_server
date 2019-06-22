@@ -37,8 +37,7 @@ export class Student {
     @ManyToOne(type => Bus, bus => bus.students)
     bus: Bus;
 
-    @OneToOne(type => Coordinates)
-    @JoinColumn()
+    @ManyToOne(type => Coordinates)
     pickupCoordinate: Coordinates;
 
 }

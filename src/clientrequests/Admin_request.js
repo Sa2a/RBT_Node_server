@@ -5,14 +5,84 @@ const parent = require("../entity/Parent").Parent;
 const super_vis = require("../entity/Supervisor").Supervisor;
 const driv = require("../entity/Driver").Driver;
 const bus = require("../entity/Bus").Bus;
+const coordinates = require("../entity/Coordinates").Coordinates;
 const report = require("../entity/Report").Report;
+const bus_route = require("../entity/RoutePath").RoutePath;
 const app = require("../app").app;
 const getConnection = require("typeorm").getConnection();
 const connection = getConnection;
 const session = require('express-session');
 
+app.get('/review_notification_of_admin', async (req, res) => {
+
+    Admin_cont.get_notifications().then(result => {
+        res.send({reports:result});
+    });
+});
+app.get('/get_All_routes', async (req, res) => {
+
+    Admin_cont.get_all_routes().then((result) => {
+        res.send({routes: result});
+    });
+})
+app.get('/review_reports_parents', async (req, res) => {
+
+    Admin_cont.review_reports_par().then((result) => {
+        if (result === false) {
+            res.send({reports: false})
+        } else {
+            res.send({reports: result});
+        }
+    });
+});
+app.get('/review_reports_supervisors', async (req, res) => {
+
+    Admin_cont.review_reports_sup().then((result) => {
+        if (result == false) {
+            res.send({reports: false})
+        } else {
+            res.send({reports: result});
+        }
+    });
+});
+app.get('/review_reports_admins', async (req, res) => {
+
+    Admin_cont.review_reports_admin().then((result) => {
+        if (result == false) {
+            res.send({reports: false})
+        } else {
+            res.send({reports: result});
+        }
+    });
+});
+app.post('/notification', async (req, res) => {
+    let repo = new report();
+    repo.content = req.body.notification.content;
+    repo.User_mail = "Admin";
+    repo.receiver_mail_or_id = req.body.notification.user_type;
+    Admin_cont.add_report(repo).then(result => {
+        res.send({report: result});
+    })
+
+});
+app.post('/add_answer', async (req, res) => {
+    Admin_cont.find_and_update_report(req.body.answer.reportId, req.body.answer.answer).then(result => {
+        res.send({answer: result})
+    })
+});
+app.get('/get_find_students', async (req, res) => {
+    Admin_cont.get_all_students().then((result) => {
+        console.log(result);
+        res.send({Users: result});
+    })
+})
 
 app.post('/add_bus', async (req, res) => {
+    let check_busNumebr = await Admin_cont.check_busNumebr(req.body.bus.busNumber);
+    if (check_busNumebr === false) {
+        res.send({status: "bus Number/Name is already exist"});
+        return;
+    }
     let b = new bus();
     b.bus_numbers = req.body.bus.busNumber;
     b.capacity = req.body.bus.capacity;
@@ -35,8 +105,18 @@ app.get('/find_driver_not_selected', async (req, res) => {
     })
 })
 
+app.get('/get_buses_with_coordinates', async (req, res) => {
+    Admin_cont.get_buses_with_coordinates().then((result) => {
+        res.send({buses: result});
+    })
+})
 app.get('/get_buses', async (req, res) => {
     Admin_cont.get_buses().then((result) => {
+        res.send({buses: result});
+    })
+})
+app.get('/get_buses_without_routes', async (req, res) => {
+    Admin_cont.get_buses_without_routes().then((result) => {
         res.send({buses: result});
     })
 })
@@ -44,18 +124,21 @@ app.post('/add_user', async (req, res) => {
 
 
     let check_email = await Admin_cont.check_admins_supervisor_driver_parent_student(req.body.user.email);
-    if (check_email == false) {
-        res.send({status: "Email is already exist"})
-    };
-    let check_by_contact = await Admin_cont.check_user_by_contact_number(req.body.user.contactNumber)
-    if (check_by_contact == false) {
-        res.send({status: "The Contact_Numeber is already exist"})
+    if (check_email === false) {
+        res.send({status: "Email is already exist"});
+        return;
     }
-    ;
+    let check_by_contact = await Admin_cont.check_user_by_contact_number(req.body.user.contactNumber);
+    if (check_by_contact === false) {
+        res.send({status: "The Contact Number is already exist"});
+        return;
+    }
+
 
     let check_by_national = await Admin_cont.check_user_by_national_namber(req.body.user.nationalNumber);
-    if (check_by_national == false) {
-        res.send({status: "The National Number is already exist"})
+    if (check_by_national === false) {
+        res.send({status: "The National Number is already exist"});
+        return;
     }
 
     if (req.body.user.userType === "admin") {
@@ -106,10 +189,9 @@ app.post('/add_user', async (req, res) => {
         Admin_cont.add_driver(driver).then(result => {
             res.send({user: result, status: true});
         })
-    }
-    else {
+    } else {
         let par = new parent();
-        let students=[];
+        let students = [];
         par.firstName = req.body.user.firstName;
         par.lastName = req.body.user.lastName;
         par.username = par.firstName + "_" + par.lastName;
@@ -120,40 +202,98 @@ app.post('/add_user', async (req, res) => {
         par.nationalNumber = req.body.user.nationalNumber;
         par.address = req.body.user.address;
         par.Type_of_user = req.body.user.userType;
-        for(let i=0;i<req.body.user.students.length;i++) {
+        let add_par = await Admin_cont.add_parent(par);
+
+        let status = true;
+        let state = "student exitss with the same ides = ";
+        for (let i = 0; i < req.body.user.students.length; i++) {
+            let check_id = await Admin_cont.check_student_id(req.body.user.students[i].id);
+            if (check_id === false) {
+                status = false;
+                state += req.body.user.students[i].id + ', ';
+                continue;
+            }
             let stud = new student();
+            stud.id = req.body.user.students[i].id;
             stud.name = req.body.user.students[i].name;
-            stud.bus = await Admin_cont.find_bus(req.body.user.students[i].busId);
             stud.classNumber = req.body.user.students[i].classNumber;
             stud.level = req.body.user.students[i].level;
             stud.dateOfBirth = req.body.user.students[i].dateOfBirth;
             stud.address = req.body.user.students[i].address;
-            stud.parent = par;
+            stud.parent = add_par;
+            stud.bus = await Admin_cont.find_bus(req.body.user.students[i].busId);
+            stud.pickupCoordinate = await Admin_cont.find_coord(req.body.user.students[i].pickUpPointId);
             await Admin_cont.add_student(stud);
             students.push(stud);
         }
-        par.students=students;
-        let add_par=await Admin_cont.add_parent(par);
-        res.send({user: add_par, status: true});
+        res.send({user: add_par, status: status ? true : state});
 
     }
 })
 //add student
-app.get('/get_add_student', async (req, res) => {
+app.post('/add_student', async (req, res) => {
+    if (req.body.student.parentId == null) {
+        res.send({status: 'parent field is required'});
+        return;
+    }
+    let check_id = await Admin_cont.check_student_id(req.body.student.id);
+    if (check_id === false) {
+        res.send({status: "A student with the same id exists"});
+        return;
+    }
     let stud = new student();
-    stud.name = req.body.name;
-    stud.parent_mail = req.body.parent_mail;
-    stud.age = req.body.age;
-    stud.bus = req.body.bus;
-    stud.classNumber = req.body.classNumber;
-    stud.level = req.body.level;
-    stud.dateOfBirth = new Date(req.body.user.yearOfBirth, req.body.user.MonthOfBirth, req.body.user.DayOfBirth);
+    stud.name = req.body.student.name;
+    stud.id = req.body.student.id;
+    stud.dateOfBirth = req.body.student.dateOfBirth;
+    stud.address = req.body.student.address;
+    stud.classNumber = req.body.student.classNumber;
+    stud.level = req.body.student.level;
+    stud.parent = await Admin_cont.find_parent(req.body.student.parentId);
+    stud.bus = await Admin_cont.find_bus(req.body.student.busId);
+    stud.pickupCoordinate = await Admin_cont.find_coord(req.body.student.pickUpPointId)
     Admin_cont.add_student(stud).then(result => {
-        res.send(result);
+        res.send({status: true, student: result});
     });
 });
+app.post('/add_route', async (req, res) => {
+    let route = new bus_route();
+    route.name = req.body.route.name;
+    let check = await Admin_cont.find_route_path(route.name);
+    if (check === false) {
+        res.send({status: "A route withe the same name already exists"});
+        return;
+    }
+    route.bus = await Admin_cont.find_bus(req.body.route.busId);
+    let points = [];
+    for (let i = 0; i < req.body.route.pickUpPoints.length; i++) {
+        let pickup = new coordinates();
+        pickup.address = req.body.route.pickUpPoints[i].address;
+        pickup.label = req.body.route.pickUpPoints[i].label;
+        pickup.latitude = req.body.route.pickUpPoints[i].lat;
+        pickup.longitude = req.body.route.pickUpPoints[i].lng;
+        await Admin_cont.add_coord(pickup);
+        points.push(pickup);
+    }
+    route.coordinates = points;
+    await Admin_cont.add_route(route);
+    res.send({status: true, route: route});
 
-
+})
+/*
+app.post('/add_pick_up_points',async(req,res)=>{
+    let pickup=new coordinates();
+    pickup.address=req.body.address;
+    pickup.label=req.body.label;
+    pickup.latitude=req.body.lat;
+    pickup.longitude=req.body.lng;
+   let coord=await Admin_cont.add_coord(pickup);
+   res.send({result:coord});
+})*/
+app.post('/get_route', async (req, res) => {
+    Admin_cont.get_route(req.body.name).then((result) => {
+        res.send({Routes: result});
+    })
+})
 app.get('/get_find_admins', async (req, res) => {
     Admin_cont.get_admins().then((result) => {
         console.log(result);
@@ -249,41 +389,3 @@ app.post('/add_answer', async (req, res) => {
         res.send(result)
     })
 });
-
-app.post('/notification', async (req, res) => {
-    let repo = new report();
-    repo.type = req.body.type;
-    repo.content = "general";
-    repo.User_mail = "admin";
-    repo.receiver_mail_or_id = "parents";
-    Admin_cont.add_report(repo).then(result => {
-        res.send(result);
-    })
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

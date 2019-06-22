@@ -1,18 +1,10 @@
-const Admin = require('../entity/Admin').Admin;
 const Driver = require('../entity/Driver').Driver;
-const bus = require('../entity/Bus').Bus;
 const Student = require('../entity/Student').Student;
-const Supervisor =require('../entity/Supervisor').Supervisor;
 const absen =require('../entity/Attendance').Attendance;
 const Report = require('../entity/Report').Report;
 const Parent = require('../entity/Parent').Parent;
-const metadata = require("reflect-metadata");
 const getConnection = require("typeorm").getConnection();
 const connection = getConnection;
-const eventEmitter = require("events");
-
-let event = new eventEmitter();
-
 
 let add_report=async function(report)
 {
@@ -33,12 +25,6 @@ let check_parent=async function(email,password){
     }
 
     };
-
-let display_info=async function (email){
-    let stud_info=await  connection.getRepository(Student);
-    let find_stud=await stud_info.find({parent_mail:email});
-    return find_stud;
-}
 let delete_repo=async function(email){
     let res=await connection.getRepository(Report);
 
@@ -67,14 +53,18 @@ let delete_repo=async function(email){
                  return final;
 
     }
-
 let notification =async function(){
-  let not= await connection.getRepository(Report);
-  let notification =await not.find({receiver_mail_or_id:"parents"});
-  return notification;
+    let not= await connection.getRepository(Report);
+    let notification =await not.find({receiver_mail_or_id:"Parents"});
+    return notification;
 
 };
 
+let get_parent_id=async function(email){
+    let par=await connection.getRepository(Parent);
+    let par_info=await par.findOne({email:email});
+    return par_info.id;
+}
 let check_answer=async function(email){
     console.log(email);
     let check=await connection.getRepository(Report);
@@ -95,35 +85,64 @@ for(let i=0;i<notification.length;i++) {
         return false;
 }
 let show_mychildren_information=async function(email){
-    let children=await  connection.getRepository(Student);
-    let child_info=await children.find({parent_mail:email});
-    return child_info;
+    let parent=await connection.getRepository(Parent);
+    let paren_of_my_child=await parent.find({
+        relations:['students'],
+        select : ['username'],
+        where:[{email : email} ]
+    });
+    return paren_of_my_child[0].students;
 };
-let show_driver_information=async function(username){
-    let driver=await  connection.getRepository(Driver);
-    let driver_info=await driver.find({username:username});
- for(let i=0;i<driver_info.length;i++){
-         driver_info[i].password=null;
- }
-    return driver_info;
-};
+let show_driver_information=async function(email){
 
+    let parent=await connection.getRepository(Parent);
+    let driver=await connection.getRepository(Driver);
+    let par_id=await parent.find({email:email});
+
+    let stude=await connection.getRepository(Student);
+    let child=await stude.findOne({
+        relations:['parent','bus'],
+        where:[{parentId : par_id.id} ]
+    });
+    let bus_and_driver_info=[];
+    bus_and_driver_info.push(child);
+    let bus_info=bus_and_driver_info[0].bus;
+    console.log(bus_info);
+    let driv=await driver.findOne({
+        relations:['bus'],
+        where:[{busId:bus_info.id} ]
+    });
+driv.bus_numbers=bus_info.bus_numbers;
+    return driv;
+};
+let get_parent=async function(id){
+    let s=await connection.getRepository(Parent);
+    let sup=s.findOne({id:id});
+    return sup;
+}
 let check_absense=async function(email){
     let absence=await connection.getRepository(absen);
-    let mychildren_abs=await absence.find({email:email,status:false});
-    return mychildren_abs;
-
+    let stude=await show_mychildren_information(email);
+    let attendance ;
+    for(let i=0;i<stude.length;i++) {
+        console.log(stude[i].name);
+         attendance=await absence.find({
+            where:[{studentId:stude[i].id}]
+        });
+    }
+    return attendance;
 }
 module.exports={
   add_report,
     check_parent,
-    display_info,
     Display_answer,
     notification,
     show_mychildren_information,
     show_driver_information,
     check_answer,
     delete_repo,
-    check_absense
+    check_absense,
+    get_parent,
+    get_parent_id
 
 };

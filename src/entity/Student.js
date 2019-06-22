@@ -71,8 +71,7 @@ var Student = /** @class */ (function () {
         __metadata("design:type", Bus_1.Bus)
     ], Student.prototype, "bus", void 0);
     __decorate([
-        typeorm_1.OneToOne(function (type) { return Coordinates_1.Coordinates; }),
-        typeorm_1.JoinColumn(),
+        typeorm_1.ManyToOne(function (type) { return Coordinates_1.Coordinates; }),
         __metadata("design:type", Coordinates_1.Coordinates)
     ], Student.prototype, "pickupCoordinate", void 0);
     Student = __decorate([

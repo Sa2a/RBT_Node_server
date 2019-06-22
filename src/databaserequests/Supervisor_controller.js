@@ -1,10 +1,9 @@
-//import {Supervisor} from "../entity/Supervisor";
 const Supervisor = require('../entity/Supervisor').Supervisor;
 const student = require('../entity/Student').Student;
 const attendance = require('../entity/Attendance').Attendance;
+const Parent = require('../entity/Parent').Parent;
 const getConnection = require("typeorm").getConnection();
 const connection = getConnection;
-const eventEmitter = require("events");
 const Report = require('../entity/Report').Report;
 
 
@@ -18,7 +17,7 @@ let add_report=async function(report)
 
 let notification =async function(){
     let not= await connection.getRepository(Report);
-    let notification =await not.find({receiver_mail_or_id:"Supervisor"});
+    let notification =await not.find({receiver_mail_or_id:"supervisor"});
     return notification;
 
 };
@@ -47,7 +46,16 @@ let check_answer=async function(email){
     if(x==true) {return true;}
     return false;
 }
-
+let get_supervisor=async function(id){
+    let s=await connection.getRepository(Supervisor);
+    let sup=s.findOne({id:id});
+    return sup;
+}
+let get_supervisor_id=async function(email){
+    let s=await connection.getRepository(Supervisor);
+    let sup=s.findOne({email:email});
+    return sup.id;
+}
 let Display_answer=async  function(email){
     let res=await connection.getRepository(Report);
     let ans=await res.find({User_mail:email,Ishidden:false});
@@ -64,30 +72,46 @@ let Display_answer=async  function(email){
                 final.push(ans[i]);
             }
         }}
-    /* let updated= await res.createQueryBuilder().update(res).set({Ishidden: true}).where({User_mail:email,Ishidden:false}).execute();*/
 
     return final;
 
 }
+/*
+let  parents_related=async function(id){
+    let st=await connection.getRepository(student);
+    let par=await connection.getRepository(Parent);
 
+    let stud=await st.findOne({relation:['parent'],where:[{id:id}]});
+    let  paren=await par.findOne({relation: ['students'],where:[{students:stud}]
+
+    })
+    return paren;
+}*/
 let Students_related_to_supervisor=async function(email){
     let std=await connection.getRepository(student);
-    let student_indo=std.find({supervisor_mail:email});
-    if(student_indo!=null) {
-        return student_indo;
+    let super_viso=await connection.getRepository(Supervisor);
+
+    let supervisor_info=super_viso.find({supervisor_mail:email});
+    if(supervisor_info!=null) {
+        let arr=[];
+        let supervis=await std.find({relation:['supervisor'],where:[{supervisorId:supervisor_info.id}]});
+        for(let i=0;i<supervis.length;i++){
+            arr.push(supervis[i]);
+        }
+        return arr;
     }
         return false;
 }
 
 let add_attendance=async function(students){
     let add=await connection.getRepository(attendance);
-    for(let i=0;i<students.length;i++) {
-        console.log(students[i]);
-        await add.save(students[i]);
-    }
-   return true;
+    await add.save(students);
 }
-
+let find_student=async function(id){
+    let stud=await connection.getRepository(student);
+    let students=await stud.findOne({id:id});
+    return students;
+}
 let check_supervisor=async function(email,password){
     let parRep=await connection.getRepository(Supervisor);
     let existed = await parRep.findOne({email:email,password:password});
@@ -99,7 +123,11 @@ let check_supervisor=async function(email,password){
     }
 }
 
-
+let get_parent=async function(parent){
+    let par=await connection.getRepository(Parent);
+    let pare=par.findOne({Parent:parent});
+    return pare;
+}
 
 
 
@@ -115,7 +143,12 @@ add_report,
     delete_repo,
     Display_answer,
     Students_related_to_supervisor,
+    find_student,
     add_attendance,
-    check_supervisor
+    check_supervisor,
+    get_parent,
+    get_supervisor,
+    parents_related,
+    get_supervisor_id
 
 }

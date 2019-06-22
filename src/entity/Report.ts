@@ -8,25 +8,26 @@ export class Report {
 
     @PrimaryGeneratedColumn()
     id:number;
-
+    @Column()
+    type_of_user:String;
     @Column()
     content:String;
-   @Column()
-   answer:String;
+    @Column()
+    answer:String;
 
-    @Column('date')
+    @Column('datetime')
     dateTime: Date;
 
-     @Column()
-     User_mail:String;
+    @Column()
+    User_mail:String;
 
     @Column()
     Ishidden:boolean;
     @Column()
     first_time:boolean;
 
-     @Column()
-     receiver_mail_or_id:String;
+    @Column()
+    receiver_mail_or_id:String;
 
     @ManyToOne(type => Parent, parent => parent.reports)
     parent: Parent;

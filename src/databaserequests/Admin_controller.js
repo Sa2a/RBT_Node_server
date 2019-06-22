@@ -1,13 +1,17 @@
-const IsNull = require('typeorm').IsNull;
+const RoutePath = require("../entity/RoutePath").RoutePath;
+
+const {IsNull, Not} = require('typeorm');
 
 const Admin = require('../entity/Admin').Admin;
 const Driver = require('../entity/Driver').Driver;
 const Bus = require('../entity/Bus').Bus;
 const student = require('../entity/Student').Student;
+const bus_route = require('../entity/RoutePath').RoutePath;
+const points = require('../entity/Coordinates').Coordinates;
 const Supervisor = require('../entity/Supervisor').Supervisor;
 const report = require('../entity/Report').Report;
 const Parent = require('../entity/Parent').Parent;
-const metadata = require("reflect-metadata");
+require("reflect-metadata");
 const getConnection = require("typeorm").getConnection();
 const connection = getConnection;
 const eventEmitter = require("events");
@@ -17,38 +21,42 @@ let event = new eventEmitter();
 // to add a new admin
 let add_admin = async function (admin) {
     let adminRep = await connection.getRepository(Admin);
-    await adminRep.save(admin);
-    let adm = await adminRep.findOne(admin);
-    return adm;
+    let ad = await adminRep.save(admin);
+    return await adminRep.findOne({id: ad.id});
 }
 
 // add a new student
 let add_student = async function (stud) {
     let studentRep = await connection.getRepository(student);
-    await studentRep.save(stud);
+    let studx = await studentRep.save(stud);
+    return await studentRep.findOne({id: studx.id});
 }
 //add a new parent
 let add_parent = async function (par) {
     let studentRep = await connection.getRepository(Parent);
-    await studentRep.save(par);
-    let adm = await studentRep.find(par);
-    return adm;
+    let parx = await studentRep.save(par);
+    return await studentRep.findOne({id: parx.id});
 }
 
 //add a new supervisor
 let add_superavisor = async function (sup) {
     let studentRep = await connection.getRepository(Supervisor);
-    await studentRep.save(sup);
-    let adm = await studentRep.find(sup);
-    return adm;
+    let s1 = await studentRep.save(sup);
+    return await studentRep.findOne({id: s1.id});
 }
-
+let add_coord = async function (point) {
+    let bus_route = await connection.getRepository(points);
+    return await bus_route.save(point);
+};
+let add_route = async function (route) {
+    let routePath = await connection.getRepository(bus_route);
+    return await routePath.save(route);
+}
 //add a new driver
 let add_driver = async function (drive) {
     let driver = await connection.getRepository(Driver);
-    await driver.save(drive);
-    let adm = await driver.find(drive);
-    return adm;
+    return await driver.save(drive);
+
 }
 //add bus
 let add_buses = async function (bus) {
@@ -62,23 +70,38 @@ let get_admins = async function () {
     return Ad;
 };
 //get all parents
+let get_buses_with_coordinates = async function () {
+    let busRepo = await getConnection.getRepository(Bus);
+    let buses = await busRepo.find({
+            relations: ['driver', 'supervisor', 'students', 'routePath', 'routePath.coordinates']
+            , where: {routePath: Not(IsNull())}
+        }
+    );
+    return buses;
+}
 let get_buses = async function () {
     let busRepo = await getConnection.getRepository(Bus);
     let buses = await busRepo.find({relations: ['driver', 'supervisor', 'students', 'routePath']});
     return buses;
 }
+let get_buses_without_routes = async function () {
+    let busRepo = await getConnection.getRepository(Bus);
+    let buses = await busRepo.find({where: {routePath: IsNull()}});
+    return buses;
+}
+
 
 ////get all drivers
 let getdrivers = async function () {
     let DriverRepo = await getConnection.getRepository(Driver);
-    let drivers = await DriverRepo.find();
+    let drivers = await DriverRepo.find({relations: ['bus']});
     return drivers;
 }
 
 ////get all supervisor
 let getsupervisor = async function () {
     let supervisorRepo = await getConnection.getRepository(Supervisor);
-    let supervis = await supervisorRepo.find();
+    let supervis = await supervisorRepo.find({relations: ['students', 'bus']});
     return supervis;
 }
 //review reports
@@ -88,7 +111,7 @@ let review_reports = async function () {
     return repo;
 };
 //find report to answer
-let find_and_update_report = async function (email, answer) {
+/*let find_and_update_report = async function (email, answer) {
     let ParentRepo = await getConnection.getRepository(report);
     let update = await ParentRepo.createQueryBuilder().update(ParentRepo)
         .set({answer: answer})
@@ -96,7 +119,7 @@ let find_and_update_report = async function (email, answer) {
         .execute();
     let after_update = await ParentRepo.findOne({email: email, answer: answer});
     return after_update;
-};
+};*/
 // check admin
 let check_adimn = async function (email, password) {
     let admin = await getConnection.getRepository(Admin);
@@ -130,7 +153,7 @@ let find_user_by_email = async function (email, type) {
     let supervisor = await getConnection.getRepository(Supervisor);
     let driver = await getConnection.getRepository(Driver);
     let parent = await getConnection.getRepository(Parent);
-    let student = await getConnection.getRepository(Student);
+    let student = await getConnection.getRepository(student);
     let Ad = await admin.findOne({email: email});
     let sup = await supervisor.findOne({email: email});
     let drive = await driver.findOne({email: email});
@@ -144,7 +167,7 @@ let find_user_by_email = async function (email, type) {
         return stud;
     } else if (drive != null && type === "driver") {
         return drive;
-    } else if (par != null && type == "parent") {
+    } else if (par != null && type === "parent") {
         return par;
     }
     /*else if(stud!=null){
@@ -248,6 +271,19 @@ let find_supervisor = async function (id) {
     let dr = await super_visor.findOne({id: id});
     return dr;
 }
+let find_parent = async function (id) {
+    let par = await getConnection.getRepository(Parent);
+    let dr = await par.findOne({id: id});
+    return dr;
+}
+let find_route_path = async function (route_name) {
+    let par = await getConnection.getRepository(RoutePath);
+    let dr = await par.findOne({name: route_name});
+    if (dr == null) {
+        return true;
+    }
+    return false;
+}
 
 let add_report = async function (repo) {
     let report_connection = await getConnection.getRepository(report);
@@ -305,149 +341,110 @@ let check_user_by_contact_number = async function (contact) {
         return false;
     }
 }
+let check_student_id = async function (id) {
+
+    let studentRep = await connection.getRepository(student);
+    let stud = await studentRep.findOne({id});
+    if (stud == null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+let check_busNumebr = async function (number) {
+
+    let busRep = await connection.getRepository(Bus);
+    let bus = await busRep.findOne({bus_numbers: number});
+    if (bus == null) {
+        return true;
+    } else {
+        return false;
+    }
+}
 let find_bus = async function (id) {
     let bus = await getConnection.getRepository(Bus);
     let b = bus.findOne({id: id});
     return b;
 }
-/*
-///////
-let findByCandidateAndPosition = async function (candidate,position)
-{
-    let userExamRepo = await getConnection.getRepository(UserExams);
-    let Exams = await userExamRepo.find(
-        {
-            where: {candidate: candidate,position: position},
-            relations : ["exam","candidate","precedence","questions","position"]
-        });
-    return Exams;
-};
-let findByCandidateAndExamAndPosition =async function (candidate,exam,position)
-{
-    let userExamRepo = await getConnection.getRepository(UserExams);
-    let Exams = await userExamRepo.findOne(
-        {
-            where: {exam: exam, candidate: candidate,position: position},
-            relations : ["exam","candidate","precedence","questions"]
-        });
-    return Exams;
-};
-//Emitter.on("save",(userExam) =>{
-let save = async function (userExam){
-    let userExamRepo = await getConnection.getRepository(UserExams);
-    await userExamRepo.save(userExam);
-};
-//////////////////////////////////////////////////////////////////////////////////////////
-event.on('getUserGeneratedExam', async (req, res) => {
-    //user exam should come from sessions
-    // let exam = req.session.exam;
-    // let candidate = req.session.candidate;
-    // let exam = await connection.getRepository(Exam).findOne({name: req.body.examName}, {relations: ["questions"]});
-    // let candidate = await connection.getRepository(Candidate).findOne({username: req.body.userName});
-    let userExam = await getUserEx(req);
-    let exam = userExam.exam;
-    let status = false;
-    let numOfQuestions =4;
-    if (userExam.precedence == null || userExam.precedence.passed) {
-        if (userExam.questions.length != numOfQuestions) {
-            let generatedQuestions = getRandomElements(exam.questions, numOfQuestions);
-            for (let i = 0; i < numOfQuestions; i++) {
-                let questionDetails = new QuestionDetail();
-                questionDetails.question = generatedQuestions[i];
-                let wrongAns = await connection.manager.find(Answer, {
-                    question: questionDetails.question,
-                    correctness: false
-                });
-                questionDetails.answers = getRandomElements(wrongAns, 3);
-                let correctAnswers = await connection.manager.find(Answer, {
-                    question: questionDetails.question,
-                    correctness: true
-                });
-                questionDetails.answers.push(getRandomElements(correctAnswers, 1)[0]);
-                shuffle(questionDetails.answers);
-                questionDetails.userExam = userExam;
-                await connection.manager.save(questionDetails);
-                // userExam.questions.push(questionDetails);
-            }
-            userExam = await getUserEx(req);
-        }
-        // await userExam.reload();
-        status = true;
-    }
-    // req.session.setTimeout(10,(gfhgj)=>{
-    //    console.log('timeOut')
-    // });
-    res.send({status: status, userExam: userExam});
-});
-// let getUserExam = ( examName, userName)=>{
-//     return typeorm.createConnection().then(async connection => {
-//         let exam = await connection.getRepository(Exam).findOne({name: examName},{ relations: ["questions"] });
-//         let candidate = await connection.getRepository(Candidate).findOne({username: userName});
-//         let userExam = await connection.manager.findOne(UserExams, {exam: exam, candidate: candidate},
-//             {relations:["exam","candidate","questions","questions.question","questions.chosenAnswer","questions.answers"]});
-//         await connection.close();
-//         return userExam;
-//     }).catch(error => console.log(error));
-// };
-function getRandomElements(arr, numOfElements) {
-    let returnArray = new Array(numOfElements);
-    let chosenIndex;
-    let chosenElements = new Array(numOfElements);
-    for (let i=0; i< numOfElements; i++) {
-        do {
-            chosenIndex = randomInt(0, arr.length);
-        } while (chosenElements.includes(chosenIndex));
-        chosenElements[i] = chosenIndex;
-        returnArray[i] = arr[chosenIndex];
-    }
-    return returnArray;
-}
-function randomInt(low, high) {// low (inclusive) and high (exclusive) ([low, high
-    return Math.floor(Math.random() * (high - low) + low)
-}
-let getUserExam = async (examName, userName) => {
-    let exam = await connection.getRepository(Exam).findOne({name: examName}, {relations: ["questions"]});
-    let candidate = await connection.getRepository(Candidate).findOne({username: userName});
-    return await connection.manager.findOne(UserExams, {exam: exam, candidate: candidate},
-        {relations: ["exam", "candidate", "precedence", "precedence.exam", "precedence.candidate",
-                "questions", "questions.question", "questions.chosenAnswer", "questions.answers"]});
-};
-let getUserEx = async (req) => {
-    return await connection.manager.findOne(UserExams, {id: req.session.userExamID},
-        {relations: ["exam","exam.questions", "candidate","precedence","precedence.exam","precedence.candidate", "questions", "questions.question", "questions.chosenAnswer", "questions.answers"]});
-};
-let updateSolvingUserExam = async (req)=> {
-    //user exam should come from sessions
-    let userExam = await getUserEx(req);
-    let questionDetail = req.body.questionDetail;
-    let chosenAnsID = req.body.chosenAnswerID;
-    await connection.getRepository(QuestionDetail).update({userExam: userExam, question: questionDetail.question},
-        {chosenAnswer: chosenAnsID});
-};
-let updateUserExamResults = async (req) => {
-    let userExam =await getUserEx(req);
-    let score = 0 ;
-    let numOfQuestions= userExam.questions.length;
-    userExam.questions.forEach((questionDetail)=>{
-        if (questionDetail.chosenAnswer && questionDetail.chosenAnswer.correctness)
-        {
-            score+= 1/numOfQuestions;
-        }
+let get_route = async function (name) {
+    let path_route = await getConnection.getRepository(bus_route);
+    let b = path_route.findOne({
+        relations: ['bus','coordinates'],
+        where: [{name: name}]
     });
-    let passed = false;
-    if(score>= .5){
-        passed = true;
-    }
-    await connection.getRepository(UserExams).update({id:userExam.id},{passed:passed, score:score});
-};
-*/
+    return b;
+}
+let get_all_routes = async function () {
+    let path_route = await getConnection.getRepository(bus_route);
+    let b = path_route.find({relations: ['bus','coordinates']});
+    return b;
+}
+let find_coord = async function (id) {
+    let coor = await getConnection.getRepository(points);
+    let coord = await coor.findOne({id: id});
+    return coord;
+}
 
+let review_reports_par = async function () {
+    let ParentRepo = await getConnection.getRepository(report);
+    let repo = await ParentRepo.find({relations: ['parent'], where: {type_of_user: "parent"}});
+    if (repo == null) {
+        return false;
+    }
+    return repo;
+};
+let review_reports_sup = async function () {
+    let ParentRepo = await getConnection.getRepository(report);
+    let repo = await ParentRepo.find({relations: ['supervisor'], where: {type_of_user: "supervisor"}});
+    if (repo == null) {
+        return false;
+    }
+    return repo;
+};
+let review_reports_admin = async function () {
+    let ParentRepo = await getConnection.getRepository(report);
+    let repo = await ParentRepo.find({relations: ['supervisor'], where: {type_of_user: "supervisor"}});
+    if (repo == null) {
+        return false;
+    }
+    return repo;
+};
+let find_and_update_report = async function (id, answer) {
+    let ParentRepo = await getConnection.getRepository(report);
+    await ParentRepo.createQueryBuilder().update(ParentRepo)
+        .set({answer: answer})
+        .where({id: id, Ishidden: false})
+        .execute();
+    let after_update = await ParentRepo.findOne({id: id, answer: answer});
+    return after_update;
+};
+
+
+let get_all_students = async function () {
+    let students = await getConnection.getRepository(student);
+    let all_students = await students.find({relations:["parent",'bus','pickupCoordinate']});
+    return all_students;
+}
+
+
+let get_notifications=async function(){
+    let not=await getConnection.getRepository(report);
+    let notifications=not.find({User_mail:"Admin"});
+    return notifications;
+}
 module.exports = {
-    event,
+    event, review_reports_par,
+    get_notifications,
+    review_reports_sup,
+    check_student_id,
+    get_all_students,
+    find_coord,
+    check_busNumebr,
     check_user_by_contact_number,
     check_user_by_national_namber,
     //save,
     add_admin,
+    add_route,
     find_supervisor,
     add_student,
     add_parent,
@@ -469,10 +466,17 @@ module.exports = {
     find_and_update_report,
     get_supervisor_not_selected,
     get_driver_not_selected,
+    find_route_path,
     getdrivers,
     get_parent,
-    find_bus
-
+    find_bus,
+    find_parent,
+    add_coord,
+    get_route,
+    get_buses_with_coordinates,
+    get_buses_without_routes
+,
+    get_all_routes
     /*  findByCandidateAndExamAndPosition,
       findByCandidateAndPosition,
       getUserExam,updateSolvingUserExam, updateUserExamResults,getUserEx*/
