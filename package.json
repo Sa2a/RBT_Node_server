@@ -25,6 +25,6 @@
     "shuffle": "^0.2.2",
     "shuffle-array": "^1.0.1",
     "socket.io": "^2.2.0",
-    "typeorm": "^0.2.14"
+    "typeorm": "^0.2.25"
   }
 }
